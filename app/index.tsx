@@ -1,39 +1,35 @@
-import { Icon } from "@/Components/Icons";
-import { MainThemeProvider } from "@/theme/ThemeProvider";
-import { StyleSheet, Text, View } from "react-native";
+import Screen from '@/Components/Screen/Screen';
+import { Box, Button, Columns } from '@/SystemDesign';
+import { Column } from '@/SystemDesign/Components/Columns/Columns';
+import { useTheme } from '@/theme/ThemeProvider';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 
-export default function Page() {
+interface WelcomeScreenProps {}
+
+const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
+  const {} = props;
+  const { colors } = useTheme();
+
   return (
-    <MainThemeProvider>
-      <View style={styles.container}>
-        <View style={styles.main}>
-          <Text style={styles.title}>Hello World</Text>
-          <Text style={styles.subtitle}>This is the first page of your app.</Text>
-          <Icon name="checkmark"/>
+    <Screen>
+      <Box padding="16px">
+        <View style={styles.container}>
+          <Columns>
+            <Column>
+              <Button background="orange" size="small" shadowOff>
+                This is a button
+              </Button>
+            </Column>
+          </Columns>
         </View>
-      </View>
-    </MainThemeProvider>
+      </Box>
+    </Screen>
   );
-}
+};
+
+export default WelcomeScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    padding: 24,
-  },
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    maxWidth: 960,
-    marginHorizontal: "auto",
-  },
-  title: {
-    fontSize: 64,
-    fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
-  },
+  container: {},
 });

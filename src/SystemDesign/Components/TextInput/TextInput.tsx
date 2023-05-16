@@ -1,0 +1,158 @@
+import React, { ReactNode, useContext, useEffect, useState } from 'react';
+import { Box } from '../Box/Box';
+import {
+  TextInputProps as NativeTextInputProps,
+  TextInput as NativeTextInput,
+} from 'react-native';
+import { useTextInputStyle } from './useTextInputStyle';
+import { TextColor } from '@/SystemDesign/system/Color/palettes';
+import { CustomColor } from '@/SystemDesign/system/Color/useForegroundColors';
+import { Stack } from '../Stack/Stack';
+import { Text } from '../Text/Text';
+import { FormikContext } from 'formik';
+import { ButtonPressAnimation } from '../ButtonPressAnimation';
+import Icon from '../Icon/Icon';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from 'react-native-reanimated';
+import { Inline } from '../Inline/Inline';
+
+export interface TextInputProps extends NativeTextInputProps {
+  leftContent?:
+    | (({ color }: { color: TextColor | CustomColor }) => React.ReactNode)
+    | React.ReactNode;
+  rightContent?:
+    | (({ color }: { color: TextColor | CustomColor }) => React.ReactNode)
+    | React.ReactNode;
+  error?: string;
+  name?: string;
+  label?: ReactNode;
+  disabled?: boolean;
+  value?: string;
+  showHidePassOption?: boolean;
+}
+
+export const TextInput: React.FC<TextInputProps> = props => {
+  const {
+    leftContent,
+    rightContent,
+    name = '',
+    error,
+    label,
+    onChangeText,
+    value,
+    showHidePassOption = true,
+    secureTextEntry,
+  } = props;
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const formikContext = useContext(FormikContext);
+  const { errors, values, touched, setFieldValue, setFieldTouched } =
+    formikContext || {};
+
+  const errorMessage: any =
+    formikContext && touched ? errors[name || ''] : error;
+  const actualValue = formikContext ? values[name] || undefined : value;
+  const shouldEnableShowHideOption = secureTextEntry && showHidePassOption;
+  const errorAvailable = Boolean(errorMessage);
+
+  const { inputBoxStyle, otherBoxStyle, textInputStyle, getBorderColor } =
+    useTextInputStyle({
+      boxProps: props,
+    });
+
+  const animatedBorderColor = useSharedValue(
+    getBorderColor({ focused: isFocused, errorAvailable }),
+  );
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      borderColor: animatedBorderColor.value,
+    };
+  });
+
+  useEffect(() => {
+    animatedBorderColor.value = withTiming(
+      getBorderColor({ focused: isFocused, errorAvailable }),
+      { duration: 200 },
+    );
+  }, [errorAvailable, isFocused]);
+
+  return (
+    <Stack space="8px">
+      {label && (
+        <Text numberOfLines={1} weight="medium">
+          {label}
+        </Text>
+      )}
+      <Box
+        as={Animated.View}
+        style={[otherBoxStyle, animatedStyle]}
+        {...inputBoxStyle}
+        flexDirection="row">
+        {leftContent && (
+          <Box paddingRight="8px" alignItems="center" justifyContent="center">
+            {typeof leftContent === 'function'
+              ? leftContent({ color: 'labelSecondary' })
+              : leftContent}
+          </Box>
+        )}
+        <Box style={{ flex: 1 }} alignItems="center" justifyContent="center">
+          <NativeTextInput
+            {...props}
+            onChangeText={(value: string) => {
+              if (formikContext) {
+                setFieldValue(name, value);
+              } else {
+                onChangeText && onChangeText(value);
+              }
+            }}
+            onBlur={() => {
+              setFieldTouched && setFieldTouched(name, false);
+              setIsFocused(false);
+            }}
+            onFocus={() => {
+              setFieldTouched && setFieldTouched(name, true);
+              setIsFocused(true);
+            }}
+            style={[textInputStyle]}
+            value={actualValue}
+            secureTextEntry={
+              shouldEnableShowHideOption ? showPassword : secureTextEntry
+            }
+          />
+        </Box>
+        {(rightContent || shouldEnableShowHideOption) && (
+          <Box paddingLeft="8px" alignItems="center" justifyContent="center">
+            {shouldEnableShowHideOption ? (
+              <ButtonPressAnimation
+                scaleTo={0.8}
+                onPress={() => setShowPassword((prev: boolean) => !prev)}>
+                <Icon
+                  name={showPassword ? 'eye' : 'eye.slash'}
+                  color="labelSecondary"
+                />
+              </ButtonPressAnimation>
+            ) : typeof rightContent === 'function' ? (
+              rightContent({ color: 'labelSecondary' })
+            ) : (
+              rightContent
+            )}
+          </Box>
+        )}
+      </Box>
+      {errorAvailable && (
+        <Box marginTop="-10px">
+          <Inline alignVertical="center">
+            <Icon name="exclamationmark.triangle" scale={0.6} color="red" />
+            <Text size="11pt" weight="semibold" color="red">
+              {errorMessage}
+            </Text>
+          </Inline>
+        </Box>
+      )}
+    </Stack>
+  );
+};

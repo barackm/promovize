@@ -1,11 +1,10 @@
 import { metrics } from './metrics';
 const { moderateVerticalScale, verticalScale, moderateScale } = metrics;
-const ios = metrics.platform === 'ios';
 
 const font: Font = {
   family: {
     SFMono: 'SFMono-Regular',
-    SFProRounded: ios ? 'SF Pro Rounded' : 'SF-Pro-Rounded',
+    SFProRounded: 'SF-Pro-Rounded',
   },
 
   letterSpacing: {

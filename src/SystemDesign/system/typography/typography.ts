@@ -2,8 +2,8 @@ import { precomputeValues } from '@capsizecss/core';
 import { mapValues } from 'lodash';
 import { PixelRatio, Platform } from 'react-native';
 import { fontWeights } from './fontWeights';
-import { ios } from '@/env';
 import { typeHierarchy } from './typeHierarchy';
+import { ios } from '@/env';
 
 const capsize = (options: Parameters<typeof precomputeValues>[0]) => {
   const values = precomputeValues(options);

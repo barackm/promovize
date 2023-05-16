@@ -42,7 +42,7 @@ export function BackgroundProvider({
       { backgroundColor: background.color },
       ...(Array.isArray(styleProp) ? styleProp : [styleProp]),
     ],
-    [background, styleProp],
+    [background, styleProp, color],
   );
 
   const child = children({
