@@ -1,13 +1,18 @@
+import { Icon } from "@/Components/Icons";
+import { MainThemeProvider } from "@/theme/ThemeProvider";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function Page() {
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Hello World</Text>
-        <Text style={styles.subtitle}>This is the first page of your app.</Text>
+    <MainThemeProvider>
+      <View style={styles.container}>
+        <View style={styles.main}>
+          <Text style={styles.title}>Hello World</Text>
+          <Text style={styles.subtitle}>This is the first page of your app.</Text>
+          <Icon name="checkmark"/>
+        </View>
       </View>
-    </View>
+    </MainThemeProvider>
   );
 }
 
