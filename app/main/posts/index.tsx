@@ -19,6 +19,22 @@ const PostsScreen: React.FC<PostsScreenProps> = props => {
             <Menu>
               <MenuItem
                 size={52}
+                rightComponent={<MenuItem.StatusIcon status="selected" />}
+                titleComponent={<MenuItem.Label text="Posts" />}
+              />
+              <MenuItem
+                size={52}
+                rightComponent={<MenuItem.StatusIcon status="incomplete" />}
+                titleComponent={<MenuItem.Label text="Posts" />}
+              />
+              <MenuItem
+                size={52}
+                rightComponent={<MenuItem.StatusIcon status="complete" />}
+                titleComponent={<MenuItem.Label text="Posts" />}
+              />
+              <MenuItem
+                size={52}
+                rightComponent={<MenuItem.StatusIcon status="warning" />}
                 titleComponent={<MenuItem.Label text="Posts" />}
               />
             </Menu>

@@ -6,7 +6,6 @@ import {
 } from '@/SystemDesign/system/typography/typography';
 import { useMemo } from 'react';
 import font from '@/styles/fonts';
-import { ios } from '@/env';
 
 export const useTextStyles = ({
   align: textAlign,
@@ -26,7 +25,7 @@ export const useTextStyles = ({
   const getFontFamilly = (weight: TextWeight) => {
     switch (weight) {
       case 'regular':
-        return font.family.SFProRounded;
+        return font.family.SFProRounded + '-Regular';
       case 'medium':
         return font.family.SFProRounded + '-Medium';
       case 'semibold':
