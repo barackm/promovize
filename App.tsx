@@ -10,8 +10,8 @@ SplashScreen.preventAutoHideAsync();
 const App: React.FC = () => {
 
   const [fontsLoaded] = useFonts({
-    'SFMono-Regular': require('./assets/fonts/SFMono-Regular.otf'),
-    'SF-Pro-Rounded': require('./assets/fonts/SF-Pro-Rounded-Medium.otf'),
+    'SFMono-Regular': require('@/assets/fonts/SFMono-Regular.otf'),
+    'SF-Pro-Rounded': require('@/assets/fonts/SF-Pro-Rounded-Medium.otf'),
   });
 
   const onLayoutRootView = useCallback(async () => {
