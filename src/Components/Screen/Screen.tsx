@@ -1,5 +1,6 @@
 import { android } from '@/env';
 import { metrics } from '@/styles';
+import { useTheme } from '@/theme/ThemeProvider';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, View, SafeAreaView } from 'react-native';
@@ -10,9 +11,16 @@ interface ScreenProps {
 
 const Screen: React.FC<ScreenProps> = props => {
   const { children } = props;
+  const { colors } = useTheme();
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: colors.surface,
+        },
+      ]}>
       <StatusBar style="auto" />
       <SafeAreaView />
       {children}

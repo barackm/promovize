@@ -56,7 +56,7 @@ export const Button: React.FC<ButtonProps> = props => {
     containsEmoji,
     tabularNumbers,
     tintColor: tintColorProp,
-    weight = 'semibold',
+    weight = 'bold',
   } = props;
   const { buttonStyle, textSize, height, otherStyle, textColor } =
     useButtonStyle(props);

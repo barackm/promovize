@@ -1,20 +1,36 @@
 import { useTheme } from '@/theme/ThemeProvider';
-import React, { useEffect } from 'react';
+import { useFonts } from 'expo-font';
+import { SplashScreen } from 'expo-router';
+import React, { useCallback, useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 interface AppWrapperProps {
   children: React.ReactNode;
 }
 
+SplashScreen.preventAutoHideAsync();
+
 const AppWrapper: React.FC<AppWrapperProps> = props => {
   const { children } = props;
-  const { colors, setTheme, colorScheme, isDarkMode } = useTheme();
+  const { colors } = useTheme();
 
-  useEffect(() => {
-    setTheme('system');
-  }, []);
+  const [fontsLoaded] = useFonts({
+    'SFMono-Regular': require('@/assets/fonts/SFMono-Regular.otf'),
+    'SF-Pro-Rounded': require('@/assets/fonts/SF-Pro-Rounded-Medium.otf'),
+    'SF-Pro-Rounded-Semibold': require('@/assets/fonts/SF-Pro-Rounded-Semibold.otf'),
+    'SF-Pro-Rounded-Bold': require('@/assets/fonts/SF-Pro-Rounded-Bold.otf'),
+    'SF-Pro-Rounded-Regular': require('@/assets/fonts/SF-Pro-Rounded-Regular.otf'),
+  });
 
-  console.log(isDarkMode, 'isDarkMode');
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <View
@@ -23,7 +39,8 @@ const AppWrapper: React.FC<AppWrapperProps> = props => {
         {
           backgroundColor: colors.surface,
         },
-      ]}>
+      ]}
+      onLayout={onLayoutRootView}>
       {children}
     </View>
   );
@@ -34,5 +51,6 @@ export default AppWrapper;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    fontFamily: 'SF-Pro-Rounded-Regular',
   },
 });
