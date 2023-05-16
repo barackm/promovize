@@ -28,7 +28,7 @@
     "react-dom": "18.2.0",
     "react-fast-compare": "^3.2.1",
     "react-flatten-children": "^1.1.2",
-    "react-native": "0.71.7",
+    "react-native": "0.71.8",
     "react-native-action-sheet": "^2.2.0",
     "react-native-fast-image": "^8.6.3",
     "react-native-reanimated": "~2.14.4",

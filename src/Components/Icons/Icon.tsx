@@ -1,14 +1,28 @@
 import React, { forwardRef, Ref } from 'react';
-import CopyIcon from './svg/CopyIcon';
 import { CustomColor } from '@/SystemDesign/system/Color/useForegroundColors';
-import CheckmarkIcon from './svg/CheckmarkIcon';
 import { SvgProps } from 'react-native-svg';
-import WarningIcon from './svg/WarningIcon';
 import { TextColor } from '@/SystemDesign';
+
+import CheckmarkIcon from './svg/CheckmarkIcon';
+import CopyIcon from './svg/CopyIcon';
+import WarningIcon from './svg/WarningIcon';
 import EyeIcon from './svg/EyeIcon';
 import EyeSlashIcon from './svg/EyeSlashIcon';
+import HomeIcon from './svg/HomeIcon';
+import NoteTextIcon from './svg/NoteTextIcon';
+import PersonIcon from './svg/PersonIcon';
+import ThreePeopleIcon from './svg/ThreePeopleIcon';
 
-export type IconName = 'copy' | 'checkmark' | 'warning' | 'eye' | 'eyeSlash';
+export type IconName =
+  | 'copy'
+  | 'checkmark'
+  | 'warning'
+  | 'eye'
+  | 'eyeSlash'
+  | 'home'
+  | 'noteText'
+  | 'person'
+  | 'threePeople';
 
 const IconTypes: Record<IconName, any> = {
   copy: CopyIcon,
@@ -16,6 +30,10 @@ const IconTypes: Record<IconName, any> = {
   warning: WarningIcon,
   eye: EyeIcon,
   eyeSlash: EyeSlashIcon,
+  home: HomeIcon,
+  noteText: NoteTextIcon,
+  person: PersonIcon,
+  threePeople: ThreePeopleIcon,
 };
 
 export interface IconProps extends Omit<SvgProps, 'color'> {

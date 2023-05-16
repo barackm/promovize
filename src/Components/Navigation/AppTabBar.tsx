@@ -23,12 +23,14 @@ interface AppTabBarProps {
 
 const AppTabBar: React.FC<AppTabBarProps> = props => {
   const { state, options: routesList } = props;
-  const { colors } = useTheme();
+  const { colors, isDarkMode } = useTheme();
 
   return (
     <Box
       height={{
-        custom: android ? metrics.moderateScale(65) : metrics.moderateScale(80),
+        custom: android
+          ? metrics.moderateScale(65)
+          : metrics.moderateScale(100),
       }}
       width="full"
       borderTopLeftRadius={metrics.moderateScale(20)}
@@ -36,8 +38,11 @@ const AppTabBar: React.FC<AppTabBarProps> = props => {
       paddingHorizontal={{ custom: metrics.moderateScale(10) }}
       alignItems="center"
       shadow="30px"
-      justifyContent="center"
-      background="card">
+      justifyContent="flex-start"
+      paddingTop={{
+        custom: android ? metrics.moderateScale(5) : metrics.moderateScale(15),
+      }}
+      background={isDarkMode ? 'black' : 'card'}>
       <View
         style={[
           styles.linksWrapper,
@@ -74,7 +79,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: metrics.moderateScale(35),
-    height: android ? metrics.moderateScale(35) : metrics.moderateScale(40),
+    height: android ? metrics.moderateScale(35) : metrics.moderateScale(45),
     marginBottom: !android ? metrics.moderateScale(10) : 0,
   },
 });

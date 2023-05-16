@@ -18,7 +18,6 @@ const MenuContainer = ({ children, testID }: MenuContainerProps) => {
         {...(ios && { style: { overflow: 'visible' } })}
         testID={testID}>
         <Box
-          paddingHorizontal="19px"
           {...(android && {
             paddingBottom: { custom: 22 },
             paddingTop: { custom: 7 },

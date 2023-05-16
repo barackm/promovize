@@ -26,6 +26,7 @@ import {
   useForegroundColors,
 } from '@/SystemDesign/system/Color/useForegroundColors';
 import { useColorMode } from '@/SystemDesign/system/Color/ColorModeContext';
+import { HapticFeedbackType } from '@/utils';
 
 const positions = ['absolute'] as const;
 type Position = (typeof positions)[number];
@@ -161,6 +162,7 @@ export const Box = forwardRef(function Box(
     style: styleProp,
     top: topProp,
     width: widthProp,
+
     ...restProps
   },
   ref,

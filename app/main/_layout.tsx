@@ -1,11 +1,11 @@
 import { Icon } from '@/Components/Icons';
 import AppTabBar from '@/Components/Navigation/AppTabBar';
-import { Route } from '@/routes/routes';
+import { useTheme } from '@/theme/ThemeProvider';
 import { Tabs } from 'expo-router';
 import React, { ReactNode } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-interface ComponentNameProps {}
+interface MainNavigatorProps {}
 
 export type IconProps = {
   color: string;
@@ -20,23 +20,56 @@ export type RouteInterface = {
   label: string;
 };
 
-const ComponentName: React.FC<ComponentNameProps> = props => {
-  const {} = props;
+const MainNavigator: React.FC<MainNavigatorProps> = props => {
+  const { isDarkMode, colors } = useTheme();
   const appNavigators: RouteInterface[] = [
     {
       name: 'home/index',
       route: '/main/home',
       label: 'Home',
-      renderIcon: ({ color, size, isFocused }: IconProps) => (
-        <Icon name="eye" />
+      renderIcon: ({ color }: IconProps) => (
+        <Icon name="home" size={28} color={{ custom: color }} />
       ),
     },
     {
       name: 'posts/index',
       route: '/main/posts',
       label: 'Posts',
+      renderIcon: ({ color }: IconProps) => (
+        <Icon
+          name="noteText"
+          size={28}
+          colors={[
+            {
+              custom: color,
+            },
+            {
+              custom: color,
+            },
+          ]}
+        />
+      ),
+    },
+    {
+      name: 'collaboration/index',
+      route: '/main/collaboration',
+      label: 'Collaboration',
       renderIcon: ({ color, size, isFocused }: IconProps) => (
-        <Icon name="eye" />
+        <Icon
+          name="threePeople"
+          size={35}
+          colors={[
+            {
+              custom: color,
+            },
+            {
+              custom: color,
+            },
+            {
+              custom: color,
+            },
+          ]}
+        />
       ),
     },
     {
@@ -44,7 +77,7 @@ const ComponentName: React.FC<ComponentNameProps> = props => {
       route: '/main/profile',
       label: 'Profile',
       renderIcon: ({ color, size, isFocused }: IconProps) => (
-        <Icon name="eye" />
+        <Icon name="person" size={25} color={{ custom: color }} />
       ),
     },
   ];
@@ -58,7 +91,12 @@ const ComponentName: React.FC<ComponentNameProps> = props => {
   );
 
   return (
-    <Tabs initialRouteName="home" tabBar={renderTabBar}>
+    <Tabs
+      initialRouteName="home/index"
+      tabBar={renderTabBar}
+      screenOptions={{
+        headerShown: false,
+      }}>
       {appNavigators.map((item: RouteInterface, index: number) => (
         <Tabs.Screen
           key={item.name}
@@ -72,7 +110,7 @@ const ComponentName: React.FC<ComponentNameProps> = props => {
   );
 };
 
-export default ComponentName;
+export default MainNavigator;
 
 const styles = StyleSheet.create({
   container: {},

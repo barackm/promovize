@@ -4,6 +4,7 @@ import { metrics } from '@/styles';
 import { Box, ButtonPressAnimation } from '@/SystemDesign';
 import { RouteInterface } from 'app/main/_layout';
 import { useRouter } from 'expo-router';
+import { useTheme } from '@/theme/ThemeProvider';
 
 interface TabBarItemProps extends RouteInterface {
   isFocused?: boolean;
@@ -12,20 +13,27 @@ interface TabBarItemProps extends RouteInterface {
 const TabBarItem: React.FC<TabBarItemProps> = props => {
   const { renderIcon, isFocused, name, route } = props;
   const router = useRouter();
-
+  const { colors } = useTheme();
   const handleNavigate = () => {
     router.push(route);
   };
 
+  const focusedColor = colors.appleBlue;
+  const defaultColor = colors.text;
+
   return (
     <Box style={styles.tabBarItemContainer}>
-      <ButtonPressAnimation scaleTo={0.8} onPress={handleNavigate}>
+      <ButtonPressAnimation
+        scaleTo={0.8}
+        onPress={handleNavigate}
+        hapticType="selection">
         <View style={styles.iconContainer}>
-          {renderIcon({
-            color: '#000',
-            size: metrics.moderateScale(20),
-            isFocused,
-          })}
+          {renderIcon &&
+            renderIcon({
+              color: isFocused ? focusedColor : defaultColor,
+              size: metrics.moderateScale(20),
+              isFocused,
+            })}
         </View>
       </ButtonPressAnimation>
     </Box>
