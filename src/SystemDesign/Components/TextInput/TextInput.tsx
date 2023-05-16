@@ -11,13 +11,13 @@ import { Stack } from '../Stack/Stack';
 import { Text } from '../Text/Text';
 import { FormikContext } from 'formik';
 import { ButtonPressAnimation } from '../ButtonPressAnimation';
-import Icon from '../Icon/Icon';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
 import { Inline } from '../Inline/Inline';
+import { Icon } from '@/Components/Icons';
 
 export interface TextInputProps extends NativeTextInputProps {
   leftContent?:
@@ -58,10 +58,15 @@ export const TextInput: React.FC<TextInputProps> = props => {
   const shouldEnableShowHideOption = secureTextEntry && showHidePassOption;
   const errorAvailable = Boolean(errorMessage);
 
-  const { inputBoxStyle, otherBoxStyle, textInputStyle, getBorderColor } =
-    useTextInputStyle({
-      boxProps: props,
-    });
+  const {
+    inputBoxStyle,
+    otherBoxStyle,
+    textInputStyle,
+    getBorderColor,
+    placeholderTextColor,
+  } = useTextInputStyle({
+    boxProps: props,
+  });
 
   const animatedBorderColor = useSharedValue(
     getBorderColor({ focused: isFocused, errorAvailable }),
@@ -119,6 +124,7 @@ export const TextInput: React.FC<TextInputProps> = props => {
             }}
             style={[textInputStyle]}
             value={actualValue}
+            placeholderTextColor={placeholderTextColor}
             secureTextEntry={
               shouldEnableShowHideOption ? showPassword : secureTextEntry
             }
@@ -130,10 +136,7 @@ export const TextInput: React.FC<TextInputProps> = props => {
               <ButtonPressAnimation
                 scaleTo={0.8}
                 onPress={() => setShowPassword((prev: boolean) => !prev)}>
-                <Icon
-                  name={showPassword ? 'eye' : 'eye.slash'}
-                  color="labelSecondary"
-                />
+                <Icon name={showPassword ? 'eye' : 'eyeSlash'} />
               </ButtonPressAnimation>
             ) : typeof rightContent === 'function' ? (
               rightContent({ color: 'labelSecondary' })
@@ -146,7 +149,7 @@ export const TextInput: React.FC<TextInputProps> = props => {
       {errorAvailable && (
         <Box marginTop="-10px">
           <Inline alignVertical="center">
-            <Icon name="exclamationmark.triangle" scale={0.6} color="red" />
+            <Icon name="copy" scale={0.6} color="red" />
             <Text size="11pt" weight="semibold" color="red">
               {errorMessage}
             </Text>
