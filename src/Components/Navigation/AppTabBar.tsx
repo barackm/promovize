@@ -40,7 +40,7 @@ const AppTabBar: React.FC<AppTabBarProps> = props => {
       shadow="30px"
       justifyContent="flex-start"
       paddingTop={{
-        custom: android ? metrics.moderateScale(5) : metrics.moderateScale(15),
+        custom: android ? metrics.moderateScale(10) : metrics.moderateScale(15),
       }}
       background={isDarkMode ? 'black' : 'card'}>
       <View

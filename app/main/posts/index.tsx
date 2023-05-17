@@ -1,3 +1,4 @@
+import { ContextMenuButton } from '@/Components/ContextMenu';
 import Screen from '@/Components/Screen/Screen';
 import { Row, Rows, Text } from '@/SystemDesign';
 import Menu from '@/SystemDesign/Components/Menu/Menu';
@@ -37,6 +38,44 @@ const PostsScreen: React.FC<PostsScreenProps> = props => {
                 rightComponent={<MenuItem.StatusIcon status="warning" />}
                 titleComponent={<MenuItem.Label text="Posts" />}
               />
+
+              {/* <ContextMenuButton
+                menuConfig={{
+                  menuItems: [
+                    {
+                      actionKey: 'key-01-01',
+                      actionTitle: 'small',
+                      icon: {
+                        type: 'IMAGE_SYSTEM',
+                        imageValue: {
+                          systemName: 'heart',
+                          scale: 'small',
+                        },
+                      },
+                    },
+                    {
+                      actionKey: 'key-01-02',
+                      actionTitle: 'small',
+                      icon: {
+                        type: 'IMAGE_SYSTEM',
+                        imageValue: {
+                          systemName: 'heart',
+                          scale: 'small',
+                        },
+                      },
+                    },
+                  ],
+                  menuTitle: 'Theme',
+                }}
+                activeOpacity={0}
+                enableContextMenu={false}
+                onPressMenuItem={() => {}}>
+                <MenuItem
+                  size={52}
+                  rightComponent={<MenuItem.StatusIcon status="warning" />}
+                  titleComponent={<MenuItem.Label text="Posts" />}
+                />
+              </ContextMenuButton> */}
             </Menu>
           </MenuContainer>
         </Row>

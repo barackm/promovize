@@ -1,5 +1,6 @@
 import { Icon } from '@/Components/Icons';
 import AppTabBar from '@/Components/Navigation/AppTabBar';
+import { ios } from '@/env';
 import { useTheme } from '@/theme/ThemeProvider';
 import { Tabs } from 'expo-router';
 import React, { ReactNode } from 'react';
@@ -28,7 +29,7 @@ const MainNavigator: React.FC<MainNavigatorProps> = props => {
       route: '/main/home',
       label: 'Home',
       renderIcon: ({ color }: IconProps) => (
-        <Icon name="home" size={28} color={{ custom: color }} />
+        <Icon name="home" size={ios ? 28 : 22} color={{ custom: color }} />
       ),
     },
     {
@@ -38,7 +39,7 @@ const MainNavigator: React.FC<MainNavigatorProps> = props => {
       renderIcon: ({ color }: IconProps) => (
         <Icon
           name="noteText"
-          size={28}
+          size={ios ? 28 : 22}
           colors={[
             {
               custom: color,
@@ -57,7 +58,7 @@ const MainNavigator: React.FC<MainNavigatorProps> = props => {
       renderIcon: ({ color, size, isFocused }: IconProps) => (
         <Icon
           name="threePeople"
-          size={35}
+          size={ios ? 35 : 30}
           colors={[
             {
               custom: color,
@@ -77,7 +78,7 @@ const MainNavigator: React.FC<MainNavigatorProps> = props => {
       route: '/main/profile',
       label: 'Profile',
       renderIcon: ({ color, size, isFocused }: IconProps) => (
-        <Icon name="person" size={25} color={{ custom: color }} />
+        <Icon name="person" size={ios ? 25 : 20} color={{ custom: color }} />
       ),
     },
   ];
