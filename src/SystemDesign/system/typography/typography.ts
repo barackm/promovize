@@ -30,23 +30,23 @@ const capsize = (options: Parameters<typeof precomputeValues>[0]) => {
 export const fonts = {
   SFProRounded: {
     regular: {
-      fontFamily: ios ? 'SF Pro Rounded' : 'SF-Pro-Rounded-Regular',
+      fontFamily: 'SF-Pro-Rounded-Regular',
       fontWeight: ios ? fontWeights.regular : 'normal',
     },
     medium: {
-      fontFamily: ios ? 'SF Pro Rounded' : 'SF-Pro-Rounded-Medium',
+      fontFamily: 'SF-Pro-Rounded-Medium',
       fontWeight: ios ? fontWeights.medium : 'normal',
     },
     semibold: {
-      fontFamily: ios ? 'SF Pro Rounded' : 'SF-Pro-Rounded-Semibold',
+      fontFamily: 'SF-Pro-Rounded-Semibold',
       fontWeight: ios ? fontWeights.semibold : 'normal',
     },
     bold: {
-      fontFamily: ios ? 'SF Pro Rounded' : 'SF-Pro-Rounded-Bold',
+      fontFamily: 'SF-Pro-Rounded-Bold',
       fontWeight: ios ? fontWeights.bold : 'normal',
     },
     heavy: {
-      fontFamily: ios ? 'SF Pro Rounded' : 'SF-Pro-Rounded-Heavy',
+      fontFamily: 'SF-Pro-Rounded-Heavy',
       fontWeight: ios ? fontWeights.heavy : 'normal',
     },
   },

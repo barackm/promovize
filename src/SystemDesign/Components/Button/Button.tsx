@@ -18,6 +18,7 @@ import {
 } from '@/SystemDesign/system/Color/useForegroundColors';
 import { useTheme } from '@/theme/ThemeProvider';
 import { ButtonPressAnimation } from '../ButtonPressAnimation';
+import { HapticFeedback, HapticFeedbackType } from '@/utils/haptics';
 
 export type ButtonSizes = 'big' | 'medium' | 'small';
 export type ButtonVariants = 'contained' | 'outlined' | 'text';
@@ -43,6 +44,8 @@ export interface ButtonProps extends TouchableOpacityProps {
   weight?: TextWeight;
   variant?: ButtonVariants;
   autoWidth?: boolean;
+  enableHapticFeedback?: boolean;
+  hapticType?: HapticFeedbackType;
 }
 
 export const Button: React.FC<ButtonProps> = props => {
@@ -57,6 +60,8 @@ export const Button: React.FC<ButtonProps> = props => {
     tabularNumbers,
     tintColor: tintColorProp,
     weight = 'bold',
+    enableHapticFeedback = true,
+    hapticType = HapticFeedback.selection,
   } = props;
   const { buttonStyle, textSize, height, otherStyle, textColor } =
     useButtonStyle(props);
@@ -68,7 +73,8 @@ export const Button: React.FC<ButtonProps> = props => {
     <Box
       as={ButtonPressAnimation}
       activeOpacity={1}
-      hapticType="selection"
+      hapticType={hapticType}
+      enableHapticFeedback={enableHapticFeedback}
       underlayColor="transparent"
       shadow={shadowOff ? null : shadow ?? '18px'}
       {...props}
