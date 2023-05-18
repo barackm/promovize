@@ -15,7 +15,7 @@ const AppWrapper: React.FC<AppWrapperProps> = props => {
   const { colors } = useTheme();
 
   const [fontsLoaded] = useFonts({
-    'SFMono-Regular': require('@/assets/fonts/SFMono-Regular.otf'),
+    'SFMono-Regular': require('@/assets/fonts/SF-Pro-Rounded-Regular.otf'),
     'SF-Pro-Rounded': require('@/assets/fonts/SF-Pro-Rounded-Medium.otf'),
     'SF-Pro-Rounded-Medium': require('@/assets/fonts/SF-Pro-Rounded-Medium.otf'),
     'SF-Pro-Rounded-Semibold': require('@/assets/fonts/SF-Pro-Rounded-Semibold.otf'),
