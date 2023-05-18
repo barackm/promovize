@@ -3,9 +3,7 @@ import { MainThemeProvider } from '@/theme/ThemeProvider';
 import { Stack } from 'expo-router';
 import React from 'react';
 
-interface AppProps {}
-
-const App: React.FC<AppProps> = props => {
+const App: React.FC = () => {
   return (
     <MainThemeProvider>
       <AppWrapper>
