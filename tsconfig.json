@@ -9,5 +9,11 @@
       "@/*": ["src/*"]
     },
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "include": [
+    "src",
+    "app",
+    "firebase",
+    "custom.d.ts"
+  ],
 }

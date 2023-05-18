@@ -1,5 +1,5 @@
 {
-  "name": "promovise",
+  "name": "promovize",
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
@@ -22,6 +22,8 @@
     "expo-router": "^1.5.3",
     "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.4",
+    "expo-updates": "~0.16.4",
+    "firebase": "^9.22.0",
     "formik": "^2.2.9",
     "lodash": "^4.17.21",
     "react": "18.2.0",
