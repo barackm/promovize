@@ -1,3 +1,4 @@
+import { HapticFeedbackType, haptics } from '@/utils';
 import React from 'react';
 import {
   StyleProp,
@@ -20,7 +21,7 @@ interface Props extends React.ComponentProps<typeof TouchableWithoutFeedback> {
   children: React.ReactNode;
   disabled?: boolean;
   shouldAnimate?: boolean;
-  hapticType?: any;
+  hapticType?: HapticFeedbackType;
   scaleTo?: number;
 }
 
@@ -63,9 +64,9 @@ export const ButtonPressAnimation: React.FC<Props> = ({
       duration,
       easing: Easing.bezier(0.25, 0.1, 0.25, 1),
     });
+
     if (hapticType) {
-      // const hapticTrigger = haptics[hapticType];
-      // hapticTrigger && hapticTrigger();
+      haptics[hapticType]();
     }
   };
 

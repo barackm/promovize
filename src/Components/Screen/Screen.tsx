@@ -1,30 +1,29 @@
+import { Box } from '@/SystemDesign';
+import { BoxProps } from '@/SystemDesign/Components/Box/Box';
 import { android } from '@/env';
 import { metrics } from '@/styles';
 import { useTheme } from '@/theme/ThemeProvider';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, View, SafeAreaView } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 
-interface ScreenProps {
-  children: React.ReactNode;
-}
-
-const Screen: React.FC<ScreenProps> = props => {
+const Screen: React.FC<BoxProps> = props => {
   const { children } = props;
   const { colors } = useTheme();
 
   return (
-    <View
+    <Box
       style={[
         styles.container,
         {
           backgroundColor: colors.surface,
         },
-      ]}>
+      ]}
+      {...props}>
       <StatusBar style="auto" />
       <SafeAreaView />
       {children}
-    </View>
+    </Box>
   );
 };
 

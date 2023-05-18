@@ -144,8 +144,8 @@ const Label = ({ text, warn }: LabelProps) => {
   return (
     <Text
       color={warn ? { custom: colors.orangeLight } : 'labelSecondary'}
-      size="15pt"
-      weight="medium">
+      size="18px / 27px"
+      weight="bold">
       {text}
     </Text>
   );
@@ -211,7 +211,11 @@ const MenuItem = ({
   return disabled ? (
     <Item />
   ) : (
-    <ButtonPressAnimation onPress={onPress} scaleTo={0.96} testID={testID}>
+    <ButtonPressAnimation
+      onPress={onPress}
+      scaleTo={0.96}
+      testID={testID}
+      hapticType="selection">
       <Item />
     </ButtonPressAnimation>
   );
