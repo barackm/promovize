@@ -8,6 +8,7 @@ interface HomeScreenProps {}
 
 const HomeScreen: React.FC<HomeScreenProps> = props => {
   const {} = props;
+
   return (
     <Screen paddingHorizontal="16px">
       <Stack.Screen
