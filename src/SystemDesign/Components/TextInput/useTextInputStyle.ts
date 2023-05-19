@@ -12,9 +12,7 @@ export const useTextInputStyle = (props: { boxProps: TextInputProps }) => {
   const { boxProps } = props;
   const { multiline } = boxProps;
   const { colors, isDarkMode } = useTheme();
-  const borderColor = isDarkMode ? 'transparent' : colors.lightGrey;
-  const errorBorderColor = colors.error;
-  const focusBorderColor = isDarkMode ? colors.grey : colors.blueGreyDark04;
+  const backgroundColor = colors.alpha(colors.lightGrey, 0.3);
 
   const inputBoxStyle: BoxProps = useMemo(
     () => ({
@@ -28,30 +26,13 @@ export const useTextInputStyle = (props: { boxProps: TextInputProps }) => {
     [],
   );
 
-  const getBorderColor = ({
-    focused,
-    errorAvailable,
-  }: {
-    focused: boolean;
-    errorAvailable: boolean;
-  }) => {
-    if (focused && !errorAvailable) {
-      return focusBorderColor;
-    } else if (errorAvailable || (focused && errorAvailable)) {
-      return errorBorderColor;
-    } else {
-      return borderColor;
-    }
-  };
-
   const otherBoxStyle: ViewStyle = {
-    borderWidth: metrics.moderateScale(android ? 1.6 : 1.2),
-    backgroundColor: colors.alpha(colors.blueGreyDark40, 0.1),
     height: multiline ? metrics.moderateScale(100) : undefined,
     paddingVertical: metrics.moderateScale(android ? 4 : 10),
+    backgroundColor,
   };
 
-  const placeholderTextColor = colors.alpha(colors.text, 0.3);
+  const placeholderTextColor = colors.alpha(colors.text, 0.6);
 
   const textInputStyle = StyleSheet.create({
     textInput: {
@@ -59,7 +40,7 @@ export const useTextInputStyle = (props: { boxProps: TextInputProps }) => {
       padding: 0,
       width: '100%',
       fontFamily: font.family.SFProRounded,
-      fontWeight: font.weight.regular,
+      fontWeight: font.weight.medium,
       fontSize: metrics.moderateScale(android ? 15 : 18),
       justifyContent: 'center',
       textAlignVertical: multiline ? 'top' : 'center',
@@ -75,7 +56,6 @@ export const useTextInputStyle = (props: { boxProps: TextInputProps }) => {
     inputBoxStyle,
     otherBoxStyle: [otherBoxStyle],
     textInputStyle: textInputStyle.textInput,
-    getBorderColor,
     placeholderTextColor,
   };
 };
