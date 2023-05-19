@@ -1,3 +1,4 @@
+// @ts-nocheck
 module.exports = ({ config }: any) => ({
   ...config,
   runtimeVersion: {
