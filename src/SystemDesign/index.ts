@@ -16,6 +16,7 @@ export { LoadingIndicator } from './Components/LoadingIndicator/LoadingIndicator
 export { ApplyShadow } from './Components/ApplyShadow/ApplyShadow';
 export { Box } from './Components/Box/Box';
 export { Columns } from './Components/Columns/Columns';
+export { Column } from './Components/Columns/Columns';
 export { Inline } from './Components/Inline/Inline';
 export { Row } from './Components/Rows/Rows';
 export { Rows } from './Components/Rows/Rows';

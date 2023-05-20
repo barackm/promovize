@@ -92,7 +92,7 @@ export const positionSpace = {
   '0px': 0,
 } as const;
 
-type CustomSpace = { custom: number };
+type CustomSpace = { custom: number | string };
 export type Space = keyof typeof space | CustomSpace;
 export type NegativeSpace = keyof typeof negativeSpace | CustomSpace;
 export type PositionSpace = keyof typeof positionSpace | CustomSpace;
