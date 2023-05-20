@@ -1,13 +1,15 @@
 import Screen from '@/Components/Screen/Screen';
 import { Box, Button, Row, Rows, TextInput } from '@/SystemDesign';
 import { firebaseAppId } from '@/env';
-import { Stack } from 'expo-router';
+import { routes } from '@/routes';
+import { Stack, useRouter } from 'expo-router';
 import React from 'react';
 
 interface HomeScreenProps {}
 
 const HomeScreen: React.FC<HomeScreenProps> = props => {
   const {} = props;
+  const router = useRouter();
 
   return (
     <Screen paddingHorizontal="16px">
@@ -27,7 +29,14 @@ const HomeScreen: React.FC<HomeScreenProps> = props => {
           <TextInput placeholder="Message" multiline />
         </Row>
         <Row height="content">
-          <Button size="medium" shadowOff autoWidth variant="outlined">
+          <Button
+            size="medium"
+            shadowOff
+            autoWidth
+            variant="outlined"
+            onPress={() => {
+              router.push(routes.welcomeScreen);
+            }}>
             SUBMIT MESSAGE
           </Button>
         </Row>
