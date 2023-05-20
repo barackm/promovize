@@ -45,9 +45,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
             source={require('@/assets/images/logos/LogoWhite.png')}
             width={{ custom: metrics.moderateScale(80) }}
             height={{ custom: metrics.moderateScale(80) }}
-            background="black"
             borderRadius={24}
-            shadow="30px accent"
           />
         </Box>
         <Box style={styles.homeTextContainer} width="full">
@@ -59,7 +57,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
               <Text size="44pt" weight="bold" align="left">
                 To Promo
               </Text>
-              <Text size="44pt" weight="bold">
+              <Text size="44pt" weight="bold" color="secondary">
                 vize
               </Text>
             </Inline>

@@ -22,4 +22,5 @@ module.exports = ({ config }: any) => ({
       projectId: process.env.PROMOVIZE_EAS_PROJECT_ID,
     },
   },
+  plugins: ['expo-localization'],
 });
