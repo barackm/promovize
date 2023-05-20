@@ -1,9 +1,9 @@
 // @ts-nocheck
 module.exports = ({ config }: any) => ({
   ...config,
-  runtimeVersion: {
-    policy: 'sdkVersion',
-  },
+  // runtimeVersion: {
+  //   policy: 'sdkVersion',
+  // },
   updates: {
     url: process.env.PROMOVIZE_UPDATES_URL,
   },

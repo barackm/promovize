@@ -96,7 +96,12 @@ const MainNavigator: React.FC<MainNavigatorProps> = props => {
       initialRouteName="home/index"
       tabBar={renderTabBar}
       screenOptions={{
-        headerShown: false,
+        headerStyle: {
+          backgroundColor: colors.primary,
+        },
+        headerTitleStyle: {
+          color: colors.white,
+        },
       }}>
       {appNavigators.map((item: RouteInterface, index: number) => (
         <Tabs.Screen
