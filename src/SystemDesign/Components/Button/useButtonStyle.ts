@@ -54,7 +54,7 @@ export const useButtonStyle = (props: ButtonProps): ReturnValue => {
 
   const otherStyle: ViewStyle = useMemo(
     () => ({
-      borderWidth: metrics.moderateScale(android ? 1.5 : 1.3),
+      borderWidth: metrics.moderateScale(android ? 1.3 : 1.3),
       borderColor: variant === 'outlined' ? backgroundColor : 'transparent',
       backgroundColor:
         variant === 'outlined' || variant === 'text' || tintColor

@@ -31,7 +31,7 @@ export default Screen;
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: android ? metrics.moderateScale(15) : 0,
+    paddingTop: metrics.moderateScale(16),
     flex: 1,
   },
 });

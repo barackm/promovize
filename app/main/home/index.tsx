@@ -13,7 +13,7 @@ const HomeScreen: React.FC<HomeScreenProps> = props => {
     <Screen paddingHorizontal="16px">
       <Stack.Screen
         options={{
-          headerShown: false,
+          headerShown: true,
         }}
       />
       <Rows space="16px">
@@ -27,7 +27,7 @@ const HomeScreen: React.FC<HomeScreenProps> = props => {
           <TextInput placeholder="Message" multiline />
         </Row>
         <Row height="content">
-          <Button size="medium" shadowOff autoWidth>
+          <Button size="medium" shadowOff autoWidth variant="outlined">
             SUBMIT MESSAGE
           </Button>
         </Row>
