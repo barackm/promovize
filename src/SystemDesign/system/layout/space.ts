@@ -1,4 +1,4 @@
-export const space = {
+export let space = {
   '1px': 1,
   '2px': 2,
   '3px': 3,
