@@ -1,7 +1,10 @@
 {
-  "home": {
+  "welcome": {
     "welcome": "Bienvenue",
     "welcome_to": "À",
-    "intro": "Transformez votre stratégie sur les réseaux sociaux et engagez votre audience."
+    "intro": "Transformez votre stratégie sur les réseaux sociaux et engagez votre audience.",
+    "join_now": "Rejoindre maintenant",
+    "login": "Connexion",
+    "already_member": "Déjà membre ?"
   }
 }
