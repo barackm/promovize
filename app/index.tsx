@@ -51,7 +51,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
           />
         </Box>
         <Box style={styles.homeTextContainer} width="full">
-          <Stack space="10px">
+          <Stack space="20px">
             <Text size="44pt" weight="bold">
               {t('welcome.welcome')}
             </Text>
