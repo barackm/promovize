@@ -18,7 +18,7 @@ const TabBarItem: React.FC<TabBarItemProps> = props => {
     router.push(route);
   };
 
-  const focusedColor = colors.appleBlue;
+  const focusedColor = colors.primary;
   const defaultColor = colors.text;
 
   return (

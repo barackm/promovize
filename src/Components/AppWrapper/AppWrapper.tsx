@@ -1,7 +1,7 @@
 import { useTheme } from '@/theme/ThemeProvider';
 import { useFonts } from 'expo-font';
 import { SplashScreen } from 'expo-router';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 interface AppWrapperProps {
