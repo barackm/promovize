@@ -11,11 +11,7 @@ import { Stack } from '../Stack/Stack';
 import { Text } from '../Text/Text';
 import { FormikContext } from 'formik';
 import { ButtonPressAnimation } from '../ButtonPressAnimation';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { Inline } from '../Inline/Inline';
 import { Icon } from '@/Components/Icons';
 
@@ -58,32 +54,10 @@ export const TextInput: React.FC<TextInputProps> = props => {
   const shouldEnableShowHideOption = secureTextEntry && showHidePassOption;
   const errorAvailable = Boolean(errorMessage);
 
-  const {
-    inputBoxStyle,
-    otherBoxStyle,
-    textInputStyle,
-    getBorderColor,
-    placeholderTextColor,
-  } = useTextInputStyle({
-    boxProps: props,
-  });
-
-  const animatedBorderColor = useSharedValue(
-    getBorderColor({ focused: isFocused, errorAvailable }),
-  );
-
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      borderColor: animatedBorderColor.value,
-    };
-  });
-
-  useEffect(() => {
-    animatedBorderColor.value = withTiming(
-      getBorderColor({ focused: isFocused, errorAvailable }),
-      { duration: 200 },
-    );
-  }, [errorAvailable, isFocused]);
+  const { inputBoxStyle, otherBoxStyle, textInputStyle, placeholderTextColor } =
+    useTextInputStyle({
+      boxProps: props,
+    });
 
   return (
     <Stack space="8px">
@@ -94,7 +68,7 @@ export const TextInput: React.FC<TextInputProps> = props => {
       )}
       <Box
         as={Animated.View}
-        style={[otherBoxStyle, animatedStyle]}
+        style={[otherBoxStyle]}
         {...inputBoxStyle}
         flexDirection="row">
         {leftContent && (

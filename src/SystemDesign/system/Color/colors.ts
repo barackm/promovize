@@ -9,9 +9,9 @@ const buildRgba = memoFn(
 
 const darkModeColors = {
   appleBlue: '#1F87FF',
-  primary: '#0A84FF',
+  primary: '#1B45B9',
+  secondary: '#FDEE4F',
   green: '#4BD166',
-  secondary: '#5E5CE6',
   background: '#121212',
   surface: '#1C1C1E',
   error: '#FF453A',
@@ -25,6 +25,17 @@ const darkModeColors = {
   shadow: '#00000',
   shadowBlack: '#000000',
   shadowGrey: '#00000',
+  blueGreyDark: '#8798A4',
+  blueGreyDark02: '#353F49',
+  blueGreyDark04: '#2F3D48',
+  blueGreyDark20: '#404F5B',
+  blueGreyDark30: '#50636E',
+  blueGreyDark40: '#607781',
+  blueGreyDark50: '#708B94',
+  blueGreyDark60: '#809FA7',
+  blueGreyDark80: '#A1B4C1',
+  blueGreyDarker: '#1E2C36',
+  blueGreyDarkLight: '#B2C4D1',
 };
 
 export type Colors = ReturnType<typeof getColorsByTheme>;
@@ -32,23 +43,24 @@ export type Colors = ReturnType<typeof getColorsByTheme>;
 const getColorsByTheme = (isDarkMode?: boolean) => {
   let base = {
     appleBlue: '#0E76FD',
-    primary: '#007AFF',
-    secondary: '#5856D6',
+    primary: '#1B45B9',
+    secondary: '#FDEE4F',
     background: '#FFFFFF',
     surface: '#F2F2F7',
     error: '#FF3B30',
     text: '#333333',
     placeholder: '#C7C7CC',
     black: '#000000',
-    blueGreyDark: '#3C4252',
-    blueGreyDark04: '#222326',
-    blueGreyDark20: '#3A3D45',
-    blueGreyDark30: '#C5C6CB',
-    blueGreyDark40: '#B1B3BA',
-    blueGreyDark50: '#9DA0A8',
-    blueGreyDark60: '#898D97',
-    blueGreyDark80: '#636875',
-    blueGreyDarker: '#0F0F11',
+    blueGreyDark: '#465362',
+    blueGreyDark02: '#E8ECF0',
+    blueGreyDark04: '#D9DEE6',
+    blueGreyDark20: '#AAB4BE',
+    blueGreyDark30: '#8394A3',
+    blueGreyDark40: '#5D7488',
+    blueGreyDark50: '#465A69',
+    blueGreyDark60: '#3E5366',
+    blueGreyDark80: '#1F3244',
+    blueGreyDarker: '#0C1B29',
     blueGreyDarkLight: '#F3F4F5',
     grey: '#A9ADB9',
     grey20: '#333333',
@@ -64,6 +76,7 @@ const getColorsByTheme = (isDarkMode?: boolean) => {
     shadowBlack: '#000000',
     shadowGrey: '#6F6F6F',
     green: '#2CCC00',
+    veryLightBlueGrey: '#D9DEE6',
   };
 
   if (isDarkMode) {

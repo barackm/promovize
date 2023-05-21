@@ -122,6 +122,8 @@ export const globalColors = {
   black: '#000000',
   blackTint: '#12131a',
   grey: 'rgb(60, 66, 82)',
+  primary: '#1B45B9',
+  secondary: '#FDEE4F',
 };
 
 export const shadowColors = selectForegroundColors(
@@ -158,7 +160,9 @@ export type ForegroundColor =
   | 'buttonStrokeSecondary'
   | 'shadowNear'
   | 'shadowFar'
-  | 'black';
+  | 'black'
+  | 'secondary'
+  | 'primary';
 
 export type BackgroundColor =
   | 'surfacePrimary'
@@ -178,7 +182,9 @@ export type BackgroundColor =
   | 'action'
   | 'card'
   | 'cardBackdrop'
-  | 'black';
+  | 'black'
+  | 'primary'
+  | 'secondary';
 
 export const backgroundColors: Record<
   BackgroundColor,
@@ -191,6 +197,26 @@ export const backgroundColors: Record<
     },
     dark: {
       color: globalColors.darker,
+      mode: 'dark',
+    },
+  },
+  primary: {
+    light: {
+      color: globalColors.primary,
+      mode: 'dark',
+    },
+    dark: {
+      color: globalColors.primary,
+      mode: 'dark',
+    },
+  },
+  secondary: {
+    light: {
+      color: globalColors.secondary,
+      mode: 'dark',
+    },
+    dark: {
+      color: globalColors.secondary,
       mode: 'dark',
     },
   },
@@ -315,13 +341,13 @@ export const backgroundColors: Record<
     },
   },
   action: {
-    dark: {
-      color: globalColors.appleBlueLight,
-      mode: 'darkTinted',
-    },
     light: {
-      color: globalColors.appleBlue,
-      mode: 'darkTinted',
+      color: globalColors.primary,
+      mode: 'dark',
+    },
+    dark: {
+      color: globalColors.primary,
+      mode: 'dark',
     },
   },
   body: {
@@ -436,6 +462,8 @@ export const foregroundColors: Record<
     light: globalColors.white20,
     dark: globalColors.grey20,
   },
+  secondary: selectBackgroundAsForeground('secondary'),
+  primary: selectBackgroundAsForeground('primary'),
   blue: selectBackgroundAsForeground('blue'),
   green: selectBackgroundAsForeground('green'),
   red: selectBackgroundAsForeground('red'),
@@ -540,6 +568,8 @@ export const textColors = selectForegroundColors(
   'pink',
   'orange',
   'yellow',
+  'secondary',
+  'primary',
 );
 
 export const separatorColors = selectForegroundColors(
