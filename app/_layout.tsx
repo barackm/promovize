@@ -13,9 +13,8 @@ const App: React.FC = () => {
           screenOptions={{
             headerShown: false,
             header: props => {
-              const { back, navigation, options, route } = props;
+              const { navigation, options, route } = props;
               const title = options.title || route.name;
-              console.log(navigation);
               const { canGoBack, goBack } = navigation;
               return (
                 <Header title={title} canGoBack={canGoBack()} goBack={goBack} />

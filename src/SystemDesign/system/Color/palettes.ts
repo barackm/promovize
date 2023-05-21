@@ -124,6 +124,8 @@ export const globalColors = {
   grey: 'rgb(60, 66, 82)',
   primary: '#1B45B9',
   secondary: '#FDEE4F',
+  googleBlue: '#4285F4',
+  facebookBlue: '#425991',
 };
 
 export const shadowColors = selectForegroundColors(
@@ -136,6 +138,8 @@ export const shadowColors = selectForegroundColors(
   'orange',
   'yellow',
   'black',
+  'facebookBlue',
+  'googleBlue',
 );
 export type ShadowColor = (typeof shadowColors)[number];
 
@@ -162,7 +166,9 @@ export type ForegroundColor =
   | 'shadowFar'
   | 'black'
   | 'secondary'
-  | 'primary';
+  | 'primary'
+  | 'facebookBlue'
+  | 'googleBlue';
 
 export type BackgroundColor =
   | 'surfacePrimary'
@@ -184,7 +190,9 @@ export type BackgroundColor =
   | 'cardBackdrop'
   | 'black'
   | 'primary'
-  | 'secondary';
+  | 'secondary'
+  | 'googleBlue'
+  | 'facebookBlue';
 
 export const backgroundColors: Record<
   BackgroundColor,
@@ -217,6 +225,26 @@ export const backgroundColors: Record<
     },
     dark: {
       color: globalColors.secondary,
+      mode: 'dark',
+    },
+  },
+  googleBlue: {
+    light: {
+      color: globalColors.googleBlue,
+      mode: 'dark',
+    },
+    dark: {
+      color: globalColors.googleBlue,
+      mode: 'dark',
+    },
+  },
+  facebookBlue: {
+    light: {
+      color: globalColors.facebookBlue,
+      mode: 'dark',
+    },
+    dark: {
+      color: globalColors.facebookBlue,
       mode: 'dark',
     },
   },
@@ -464,6 +492,8 @@ export const foregroundColors: Record<
   },
   secondary: selectBackgroundAsForeground('secondary'),
   primary: selectBackgroundAsForeground('primary'),
+  googleBlue: selectBackgroundAsForeground('googleBlue'),
+  facebookBlue: selectBackgroundAsForeground('facebookBlue'),
   blue: selectBackgroundAsForeground('blue'),
   green: selectBackgroundAsForeground('green'),
   red: selectBackgroundAsForeground('red'),

@@ -27,12 +27,12 @@ export const useTextInputStyle = (props: { boxProps: TextInputProps }) => {
   );
 
   const otherBoxStyle: ViewStyle = {
-    height: multiline ? metrics.moderateScale(100) : undefined,
-    paddingVertical: metrics.moderateScale(android ? 4 : 10),
+    height: multiline ? metrics.moderateScale(100) : metrics.moderateScale(43),
+    paddingVertical: multiline ? metrics.moderateScale(10) : undefined,
     backgroundColor,
   };
 
-  const placeholderTextColor = colors.alpha(colors.text, 0.6);
+  const placeholderTextColor = colors.alpha(colors.text, 0.4);
 
   const textInputStyle = StyleSheet.create({
     textInput: {

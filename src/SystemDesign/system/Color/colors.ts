@@ -9,9 +9,11 @@ const buildRgba = memoFn(
 
 const darkModeColors = {
   appleBlue: '#1F87FF',
-  primary: '#1B45B9',
-  secondary: '#FDEE4F',
+  primary: globalColors.primary,
+  secondary: globalColors.secondary,
   green: '#4BD166',
+  googleBlue: globalColors.googleBlue,
+  facebookBlue: globalColors.facebookBlue,
   background: '#121212',
   surface: '#1C1C1E',
   error: '#FF453A',
@@ -45,6 +47,8 @@ const getColorsByTheme = (isDarkMode?: boolean) => {
     appleBlue: '#0E76FD',
     primary: '#1B45B9',
     secondary: '#FDEE4F',
+    googleBlue: '#4285F4',
+    facebookBlue: '#425991',
     background: '#FFFFFF',
     surface: '#F2F2F7',
     error: '#FF3B30',

@@ -8,6 +8,7 @@ import { useBackgroundColor } from '@/SystemDesign/system/Color/BackgroundProvid
 import { TextColor } from '@/SystemDesign/system/Color/palettes';
 import { CustomColor } from '@/SystemDesign/system/Color/useForegroundColors';
 import { android } from '@/env';
+import { useTheme } from '@/theme/ThemeProvider';
 
 interface ReturnValue {
   buttonStyle: any;
@@ -19,7 +20,7 @@ interface ReturnValue {
 
 export const useButtonStyle = (props: ButtonProps): ReturnValue => {
   const {
-    size = 'small',
+    size = 'medium',
     iconButton,
     background = 'action',
     variant,
@@ -28,8 +29,10 @@ export const useButtonStyle = (props: ButtonProps): ReturnValue => {
     tintColor,
     autoWidth,
   } = props;
-
+  const { colors } = useTheme();
   const backgroundColor = useBackgroundColor(background);
+  const disabledBackground = colors.alpha(colors.lightGrey, 0.5);
+  const disabledColor = colors.alpha(colors.text, 0.5);
 
   const buttonSize: Record<ButtonSizes, number> = {
     medium: metrics.moderateScale(43),
@@ -40,27 +43,30 @@ export const useButtonStyle = (props: ButtonProps): ReturnValue => {
   const textSize: Record<ButtonSizes, TextSize> = {
     medium: '16px / 22px',
     big: '18px / 27px',
-    small: '17pt',
+    small: '15pt',
   };
 
   const height = buttonSize[size as ButtonSizes];
 
-  const textColor: TextColor | CustomColor =
-    variant === 'outlined' || variant === 'text'
-      ? {
-          custom: backgroundColor,
-        }
-      : color;
+  const textColor: TextColor | CustomColor = disabled
+    ? {
+        custom: disabledColor,
+      }
+    : variant === 'outlined' || variant === 'text'
+    ? {
+        custom: backgroundColor,
+      }
+    : color;
 
   const otherStyle: ViewStyle = useMemo(
     () => ({
       borderWidth: metrics.moderateScale(android ? 1.3 : 1.3),
       borderColor: variant === 'outlined' ? backgroundColor : 'transparent',
-      backgroundColor:
-        variant === 'outlined' || variant === 'text' || tintColor
-          ? 'transparent'
-          : backgroundColor,
-      opacity: disabled ? 0.5 : 1,
+      backgroundColor: disabled
+        ? disabledBackground
+        : variant === 'outlined' || variant === 'text' || tintColor
+        ? 'transparent'
+        : backgroundColor,
     }),
     [variant, disabled, tintColor, autoWidth, background],
   );
