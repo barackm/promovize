@@ -1,3 +1,4 @@
+import '../config/i18n';
 import AppWrapper from '@/Components/AppWrapper/AppWrapper';
 import { MainThemeProvider } from '@/theme/ThemeProvider';
 import { Stack } from 'expo-router';
