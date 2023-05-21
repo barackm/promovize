@@ -5,21 +5,23 @@ import {
   Inline,
   Stack,
   Text,
+  TextInput,
 } from '@/SystemDesign';
 import { deviceUtils } from '@/SystemDesign/utils';
 import { routes } from '@/routes';
 import { metrics } from '@/styles';
-import { useRouter, Stack as RouterStack, Link } from 'expo-router';
+import { useTheme } from '@/theme/ThemeProvider';
+import { useRouter, Stack as RouterStack } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Image, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 
 interface WelcomeScreenProps {}
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
   const router = useRouter();
   const { t } = useTranslation();
-
+  const { colors } = useTheme();
   return (
     <Box
       background="primary"
@@ -29,7 +31,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
       paddingTop={{
         custom: deviceUtils.statusBarHeight + metrics.moderateScale(50),
       }}
-      paddingHorizontal="16px">
+      paddingHorizontal="20px">
       <RouterStack.Screen
         options={{
           headerShown: false,
@@ -65,7 +67,11 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
             </Inline>
           </Stack>
           <Box style={styles.subTitle}>
-            <Text size="20pt">{t('welcome.intro')}</Text>
+            <Text
+              size="18px / 27px"
+              color={{ custom: colors.alpha(colors.whiteLabel, 0.8) }}>
+              {t('welcome.intro')}
+            </Text>
           </Box>
         </Box>
       </Box>
@@ -77,7 +83,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
             color="primary"
             size="medium"
             onPress={() => {
-              router.push(routes.homeScreen);
+              router.push(routes.register);
             }}>
             {t('welcome.join_now')}
           </Button>
@@ -85,8 +91,14 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
             <Text size="17pt" weight="medium">
               {t('welcome.already_member')}
             </Text>
-            <ButtonPressAnimation hapticType="selection">
-              <Text weight="bold">{t('welcome.login')}</Text>
+            <ButtonPressAnimation
+              hapticType="selection"
+              onPress={() => {
+                router.push(routes.login);
+              }}>
+              <Text weight="bold" size="18px / 27px">
+                {t('welcome.login')}
+              </Text>
             </ButtonPressAnimation>
           </Inline>
         </Stack>
@@ -109,12 +121,12 @@ const styles = StyleSheet.create({
     marginTop: '15%',
   },
   homeTextContainer: {
-    marginTop: '25%',
+    marginTop: deviceUtils.isLargePhone ? '20%' : '15%',
   },
   subTitle: {
     marginTop: '10%',
   },
   footerContentWrapper: {
-    marginBottom: '35%',
+    marginBottom: '40%',
   },
 });

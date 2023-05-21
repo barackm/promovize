@@ -12,6 +12,8 @@ import HomeIcon from './svg/HomeIcon';
 import NoteTextIcon from './svg/NoteTextIcon';
 import PersonIcon from './svg/PersonIcon';
 import ThreePeopleIcon from './svg/ThreePeopleIcon';
+import ArrowLeftIcon from './svg/ArrowLeftIcon';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 export type IconName =
   | 'copy'
@@ -22,7 +24,8 @@ export type IconName =
   | 'home'
   | 'noteText'
   | 'person'
-  | 'threePeople';
+  | 'threePeople'
+  | 'arrowLeft';
 
 const IconTypes: Record<IconName, any> = {
   copy: CopyIcon,
@@ -34,6 +37,7 @@ const IconTypes: Record<IconName, any> = {
   noteText: NoteTextIcon,
   person: PersonIcon,
   threePeople: ThreePeopleIcon,
+  arrowLeft: ArrowLeftIcon,
 };
 
 export interface IconProps extends Omit<SvgProps, 'color'> {
@@ -44,11 +48,22 @@ export interface IconProps extends Omit<SvgProps, 'color'> {
 }
 
 const Icon: React.ForwardRefRenderFunction<Ref<unknown>, IconProps> = (
-  { name, size = 20, ...props },
+  { name, size = 20, onPress, ...props },
   ref,
 ) => {
   const IconElement = IconTypes[name];
-  return <IconElement size={size} {...props} name={name} ref={ref} />;
+  return (
+    <View>
+      <IconElement
+        size={size}
+        name={name}
+        ref={ref}
+        pointerEvents="none"
+        {...props}
+      />
+      <TouchableOpacity style={StyleSheet.absoluteFill} onPress={onPress} />
+    </View>
+  );
 };
 
 export default forwardRef(Icon);

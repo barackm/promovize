@@ -123,7 +123,7 @@ export const TextInput: React.FC<TextInputProps> = props => {
       {errorAvailable && (
         <Box marginTop="-10px">
           <Inline alignVertical="center">
-            <Icon name="copy" scale={0.6} color="red" />
+            <Icon name="warning" scale={0.6} color="red" />
             <Text size="11pt" weight="semibold" color="red">
               {errorMessage}
             </Text>
