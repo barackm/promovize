@@ -53,7 +53,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   );
 
   const handleShowActionSheet = useCallback(() => {
-    console.log('what?');
     setTimeout(() => {
       if (isOpen) return;
       setIsOpen(true);
@@ -61,7 +60,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     }, 40);
   }, [isOpen]);
 
-  console.log('Here we are');
   return (
     <Fragment>
       {/* {onPressActionSheet && ( */}

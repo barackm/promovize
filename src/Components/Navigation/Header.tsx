@@ -40,6 +40,7 @@ const Header: React.FC<HeaderProps> = props => {
               height={{ custom: CONTENT_HEIGHT }}
               alignItems="flex-start"
               justifyContent="center"
+              paddingLeft="16px"
               onPress={goBack}
               hapticType="selection">
               <Icon name="arrowLeft" />
@@ -68,7 +69,6 @@ const styles = StyleSheet.create({
   },
   contentWrapper: {
     height: CONTENT_HEIGHT,
-    paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',
   },

@@ -1,4 +1,10 @@
-import React, { ReactNode, useContext, useEffect, useState } from 'react';
+import React, {
+  ReactNode,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Box } from '../Box/Box';
 import {
   TextInputProps as NativeTextInputProps,
@@ -28,9 +34,11 @@ export interface TextInputProps extends NativeTextInputProps {
   disabled?: boolean;
   value?: string;
   showHidePassOption?: boolean;
+  placeholder?: string | any;
+  autoFocus?: boolean;
 }
 
-export const TextInput: React.FC<TextInputProps> = props => {
+export const TextInput: React.FC<TextInputProps> = React.memo(props => {
   const {
     leftContent,
     rightContent,
@@ -42,14 +50,16 @@ export const TextInput: React.FC<TextInputProps> = props => {
     showHidePassOption = true,
     secureTextEntry,
   } = props;
-  const [isFocused, setIsFocused] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const formikContext = useContext(FormikContext);
   const { errors, values, touched, setFieldValue, setFieldTouched } =
     formikContext || {};
 
-  const errorMessage: any =
-    formikContext && touched ? errors[name || ''] : error;
+  const errorMessage: any = React.useMemo(
+    () => (formikContext && touched ? errors[name || ''] : error),
+    [formikContext, touched, errors, name, error],
+  );
+
   const actualValue = formikContext ? values[name] || undefined : value;
   const shouldEnableShowHideOption = secureTextEntry && showHidePassOption;
   const errorAvailable = Boolean(errorMessage);
@@ -89,12 +99,14 @@ export const TextInput: React.FC<TextInputProps> = props => {
               }
             }}
             onBlur={() => {
-              setFieldTouched && setFieldTouched(name, false);
-              setIsFocused(false);
+              if (!touched[name]) {
+                setFieldTouched && setFieldTouched(name, false);
+              }
             }}
             onFocus={() => {
-              setFieldTouched && setFieldTouched(name, true);
-              setIsFocused(true);
+              if (touched[name]) {
+                setFieldTouched && setFieldTouched(name, true);
+              }
             }}
             style={[textInputStyle]}
             value={actualValue}
@@ -120,16 +132,16 @@ export const TextInput: React.FC<TextInputProps> = props => {
           </Box>
         )}
       </Box>
-      {errorAvailable && (
-        <Box marginTop="-10px">
-          <Inline alignVertical="center">
+      <Box marginTop={errorAvailable ? '-6px' : undefined}>
+        {errorAvailable && (
+          <Inline alignVertical="center" space="4px">
             <Icon name="warning" scale={0.6} color="red" />
-            <Text size="11pt" weight="semibold" color="red">
-              {errorMessage}
+            <Text size="13pt / 135%" weight="semibold" color="red">
+              {errorAvailable && errorMessage}
             </Text>
           </Inline>
-        </Box>
-      )}
+        )}
+      </Box>
     </Stack>
   );
-};
+});

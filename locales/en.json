@@ -6,5 +6,13 @@
     "join_now": "Join now",
     "login": "Login",
     "already_member": "Already a member?"
+  },
+  "register": {
+    "intro": "Elevate your online presence with Promovize! Sign up now and take control of your company's social media game.",
+    "continue_with_facebook": "Continue with Facebook",
+    "continue_with_google": "Continue with Google",
+    "or_register_with_email": "OR REGISTER WITH EMAIL",
+    "enter_email_address": "Enter Email address",
+    "register": "Register"
   }
 }

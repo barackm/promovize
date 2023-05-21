@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useContext } from 'react';
 import { StyleSheet, TouchableOpacityProps, View } from 'react-native';
 import { Box } from '../Box/Box';
 import { Text, TextWeight } from '../Text/Text';
@@ -19,6 +19,7 @@ import {
 import { useTheme } from '@/theme/ThemeProvider';
 import { ButtonPressAnimation } from '../ButtonPressAnimation';
 import { HapticFeedback, HapticFeedbackType } from '@/utils/haptics';
+import { FormikContext } from 'formik';
 
 export type ButtonSizes = 'big' | 'medium' | 'small';
 export type ButtonVariants = 'contained' | 'outlined' | 'text';
@@ -62,12 +63,29 @@ export const Button: React.FC<ButtonProps> = props => {
     weight = 'bold',
     enableHapticFeedback = true,
     hapticType = HapticFeedback.selection,
+    disabled,
+    onPress,
   } = props;
-  const { buttonStyle, textSize, height, otherStyle, textColor } =
-    useButtonStyle(props);
-  let tintColor = useForegroundColor(tintColorProp || 'accent');
   const { colors } = useTheme();
   const { alpha } = colors;
+
+  const formikContext = useContext(FormikContext);
+  const { handleSubmit, errors = {} } = formikContext || {};
+  const shouldBeDisabled = errors && Object.keys(errors).length > 0;
+
+  const { buttonStyle, textSize, height, otherStyle, textColor } =
+    useButtonStyle({ ...props, disabled: disabled || shouldBeDisabled });
+  let tintColor = useForegroundColor(tintColorProp || 'accent');
+
+  const onSubmit = (e: any) => {
+    if (formikContext) {
+      handleSubmit();
+    } else {
+      if (onPress) {
+        onPress(e);
+      }
+    }
+  };
 
   return (
     <Box
@@ -76,40 +94,48 @@ export const Button: React.FC<ButtonProps> = props => {
       hapticType={hapticType}
       enableHapticFeedback={enableHapticFeedback}
       underlayColor="transparent"
-      shadow={shadowOff ? null : shadow ?? '18px'}
+      shadow={
+        shadowOff || disabled || shouldBeDisabled ? null : shadow ?? '18px'
+      }
       {...props}
       {...buttonStyle}
-      style={[otherStyle]}>
-      <Inline alignVertical="center" alignHorizontal="center" space="5px">
-        {leftContent && (
-          <Box alignItems="center" justifyContent="center">
-            {typeof leftContent === 'function'
-              ? leftContent({ color: textColor })
-              : leftContent}
-          </Box>
-        )}
-        <Box alignItems="center" justifyContent="center">
-          {typeof children === 'string' && (
-            <Text
-              containsEmoji={containsEmoji}
-              tabularNumbers={tabularNumbers}
-              weight={weight}
-              color={textColor}
-              uppercase={uppercase}
-              size={textSize}>
-              {children}
-            </Text>
+      style={[otherStyle]}
+      onPress={onSubmit}>
+      {typeof children !== 'string' ? (
+        children
+      ) : (
+        <Inline alignVertical="center" alignHorizontal="center" space="5px">
+          {leftContent && (
+            <Box alignItems="center" justifyContent="center">
+              {typeof leftContent === 'function'
+                ? leftContent({ color: textColor })
+                : leftContent}
+            </Box>
           )}
-          {typeof children !== 'string' && children}
-        </Box>
-        {rightContent && (
-          <Box alignItems="center" justifyContent="center">
-            {typeof rightContent === 'function'
-              ? rightContent({ color: textColor })
-              : rightContent}
+          <Box alignItems="center" justifyContent="center" height="full">
+            {typeof children === 'string' && (
+              <Text
+                containsEmoji={containsEmoji}
+                tabularNumbers={tabularNumbers}
+                weight={weight}
+                color={textColor}
+                uppercase={uppercase}
+                size={textSize}>
+                {children}
+              </Text>
+            )}
+            {typeof children !== 'string' && children}
           </Box>
-        )}
-      </Inline>
+          {rightContent && (
+            <Box alignItems="center" justifyContent="center">
+              {typeof rightContent === 'function'
+                ? rightContent({ color: textColor })
+                : rightContent}
+            </Box>
+          )}
+        </Inline>
+      )}
+
       {tintColorProp && (
         <Cover>
           <AccentColorProvider color={alpha(tintColor, 0.1)}>
