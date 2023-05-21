@@ -11,13 +11,15 @@ import { routes } from '@/routes';
 import { metrics } from '@/styles';
 import { useRouter, Stack as RouterStack, Link } from 'expo-router';
 import React from 'react';
-
+import { useTranslation } from 'react-i18next';
 import { Image, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
 interface WelcomeScreenProps {}
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
   const router = useRouter();
+  const { t } = useTranslation();
+
   return (
     <Box
       background="primary"
@@ -51,11 +53,11 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
         <Box style={styles.homeTextContainer} width="full">
           <Stack space="10px">
             <Text size="44pt" weight="bold">
-              Welcome
+              {t('welcome.welcome')}
             </Text>
             <Inline>
               <Text size="44pt" weight="bold" align="left">
-                To Promo
+                {t('welcome.welcome_to')} Promo
               </Text>
               <Text size="44pt" weight="bold" color="secondary">
                 vize
@@ -63,9 +65,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
             </Inline>
           </Stack>
           <Box style={styles.subTitle}>
-            <Text size="20pt">
-              Transform your social media game and engage your audience.
-            </Text>
+            <Text size="20pt">{t('welcome.intro')}</Text>
           </Box>
         </Box>
       </Box>
@@ -79,14 +79,14 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
             onPress={() => {
               router.push(routes.homeScreen);
             }}>
-            Join now
+            {t('welcome.join_now')}
           </Button>
-          <Inline alignHorizontal="center">
+          <Inline alignHorizontal="center" space="10px">
             <Text size="17pt" weight="medium">
-              Already a member?{' '}
+              {t('welcome.already_member')}
             </Text>
             <ButtonPressAnimation hapticType="selection">
-              <Text weight="bold">Login</Text>
+              <Text weight="bold">{t('welcome.login')}</Text>
             </ButtonPressAnimation>
           </Inline>
         </Stack>
