@@ -14,6 +14,7 @@ import PersonIcon from './svg/PersonIcon';
 import ThreePeopleIcon from './svg/ThreePeopleIcon';
 import ArrowLeftIcon from './svg/ArrowLeftIcon';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { CustomSvgProps } from './Svg';
 
 export type IconName =
   | 'copy'
@@ -40,7 +41,7 @@ const IconTypes: Record<IconName, any> = {
   arrowLeft: ArrowLeftIcon,
 };
 
-export interface IconProps extends Omit<SvgProps, 'color'> {
+export interface IconProps extends Omit<CustomSvgProps, 'color'> {
   color?: TextColor | CustomColor;
   colors?: (TextColor | CustomColor | null)[];
   size?: number;

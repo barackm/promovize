@@ -13,6 +13,8 @@
     "continue_with_google": "Continue with Google",
     "or_register_with_email": "OR REGISTER WITH EMAIL",
     "enter_email_address": "Enter Email address",
-    "register": "Register"
+    "register": "Register",
+    "invalid_email": "Invalid email address.",
+    "email_required": "Email address is required."
   }
 }

@@ -20,6 +20,7 @@ import { ButtonPressAnimation } from '../ButtonPressAnimation';
 import Animated from 'react-native-reanimated';
 import { Inline } from '../Inline/Inline';
 import { Icon } from '@/Components/Icons';
+import { useTheme } from '@/theme/ThemeProvider';
 
 export interface TextInputProps extends NativeTextInputProps {
   leftContent?:
@@ -52,6 +53,7 @@ export const TextInput: React.FC<TextInputProps> = React.memo(props => {
   } = props;
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const formikContext = useContext(FormikContext);
+  const { colors } = useTheme();
   const { errors, values, touched, setFieldValue, setFieldTouched } =
     formikContext || {};
 
@@ -136,7 +138,10 @@ export const TextInput: React.FC<TextInputProps> = React.memo(props => {
         {errorAvailable && (
           <Inline alignVertical="center" space="4px">
             <Icon name="warning" scale={0.6} color="red" />
-            <Text size="13pt / 135%" weight="semibold" color="red">
+            <Text
+              size="13pt / 135%"
+              weight="semibold"
+              color={{ custom: colors.alpha(colors.error, 0.7) }}>
               {errorAvailable && errorMessage}
             </Text>
           </Inline>
