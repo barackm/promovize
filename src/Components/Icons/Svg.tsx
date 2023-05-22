@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import SvgPrimitive, { SvgProps } from 'react-native-svg';
 
-interface CustomSvgProps extends SvgProps {
+export interface CustomSvgProps extends SvgProps {
   scale?: number;
   scaleX?: number;
   scaleY?: number;

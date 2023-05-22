@@ -2,9 +2,19 @@
   "welcome": {
     "welcome": "Bienvenue",
     "welcome_to": "À",
-    "intro": "Transformez votre stratégie sur les réseaux sociaux et engagez votre audience.",
+    "intro": "Transformez votre jeu sur les réseaux sociaux et engagez votre public.",
     "join_now": "Rejoindre maintenant",
     "login": "Connexion",
-    "already_member": "Déjà membre ?"
+    "already_member": "Déjà membre?"
+  },
+  "register": {
+    "intro": "Améliorez votre présence en ligne avec Promovize! Inscrivez-vous maintenant et prenez le contrôle du jeu de votre entreprise sur les réseaux sociaux.",
+    "continue_with_facebook": "Continuer avec Facebook",
+    "continue_with_google": "Continuer avec Google",
+    "or_register_with_email": "OU S'INSCRIRE AVEC L'EMAIL",
+    "enter_email_address": "Entrez l'adresse e-mail",
+    "register": "S'inscrire",
+    "invalid_email": "Adresse e-mail invalide.",
+    "email_required": "L'adresse e-mail est requise."
   }
 }
