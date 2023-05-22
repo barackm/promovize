@@ -15,6 +15,10 @@
     "enter_email_address": "Enter Email address",
     "register": "Register",
     "invalid_email": "Invalid email address.",
-    "email_required": "Email address is required."
+    "email_required": "Email address is required.",
+    "by_signing_up": "By signign up, you agree to Promovize’s",
+    "and": "and",
+    "terms_of_use": "Terms of Use",
+    "privacy_policy": "Privacy Policy"
   }
 }

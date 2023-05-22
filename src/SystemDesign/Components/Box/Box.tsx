@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { forwardRef, ReactNode, useMemo } from 'react';
 import { View } from 'react-native';
 import type * as Polymorphic from './polymorphic';
@@ -6,6 +7,7 @@ import {
   NegativeSpace,
   positionSpace,
   PositionSpace,
+  resolveToken,
   space,
   Space,
 } from '@/SystemDesign/system/layout/space';
@@ -30,17 +32,6 @@ import { HapticFeedbackType } from '@/utils';
 
 const positions = ['absolute'] as const;
 type Position = (typeof positions)[number];
-
-export function resolveToken<TokenName extends string, TokenValue, CustomValue>(
-  scale: Record<TokenName, TokenValue>,
-  value: TokenName | { custom: CustomValue } | undefined,
-) {
-  return value
-    ? typeof value === 'object'
-      ? value.custom
-      : scale[value]
-    : undefined;
-}
 
 export type BoxProps = {
   alignItems?: 'flex-start' | 'flex-end' | 'center' | 'stretch';

@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   ButtonPressAnimation,
+  Image,
   Inline,
   Stack,
   Text,
@@ -14,7 +15,7 @@ import { useTheme } from '@/theme/ThemeProvider';
 import { useRouter, Stack as RouterStack } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Image, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 interface WelcomeScreenProps {}
 
@@ -39,7 +40,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
       />
       <Box width="full" alignItems="center" style={styles.screenUpperContent}>
         <Box
-          marginBottom={{ custom: '10%' }}
+          marginBottom={{ custom: deviceUtils.isSmallPhone ? 0 : '10%' }}
           width="full"
           justifyContent="center"
           alignItems="center"
@@ -47,8 +48,8 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
           <Box
             as={Image}
             source={require('@/assets/images/logos/LogoWhite.png')}
-            width={{ custom: metrics.moderateScale(80) }}
-            height={{ custom: metrics.moderateScale(80) }}
+            iWidth={{ custom: metrics.moderateScale(80) }}
+            iHeight={{ custom: metrics.moderateScale(80) }}
             borderRadius={24}
           />
         </Box>
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   logoDetailsWrapper: {
-    marginTop: '15%',
+    marginTop: deviceUtils.isSmallPhone ? '10%' : '15%',
   },
   homeTextContainer: {
     marginTop: deviceUtils.isLargePhone ? '20%' : '15%',
@@ -127,6 +128,6 @@ const styles = StyleSheet.create({
     marginTop: '10%',
   },
   footerContentWrapper: {
-    marginBottom: '40%',
+    marginBottom: deviceUtils.isSmallPhone ? '30%' : '40%',
   },
 });

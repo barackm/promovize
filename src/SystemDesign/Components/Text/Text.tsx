@@ -21,6 +21,11 @@ export type TextProps = {
   color?: TextColor | CustomColor;
   ellipsizeMode?: 'head' | 'middle' | 'tail' | 'clip' | undefined;
   numberOfLines?: number;
+  textDecorationLine?:
+    | 'line-through'
+    | 'none'
+    | 'underline'
+    | 'underline line-through';
   size?: TextSize;
   tabularNumbers?: boolean;
   uppercase?: boolean;
@@ -46,7 +51,7 @@ export const Text: React.FC<TextProps> = forwardRef(
         numberOfLines={numberOfLines}
         ellipsizeMode={ellipsizeMode}
         ref={ref}
-        style={textStyle}>
+        style={[textStyle]}>
         {ios && containsEmojiProp && nodeIsString(children)
           ? renderStringWithEmoji(children)
           : children}
