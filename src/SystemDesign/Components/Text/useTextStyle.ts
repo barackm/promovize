@@ -14,9 +14,16 @@ export const useTextStyles = ({
   weight = 'regular',
   tabularNumbers = false,
   uppercase = false,
+  textDecorationLine,
 }: Pick<
   TextProps,
-  'align' | 'color' | 'size' | 'weight' | 'tabularNumbers' | 'uppercase'
+  | 'align'
+  | 'color'
+  | 'size'
+  | 'weight'
+  | 'tabularNumbers'
+  | 'uppercase'
+  | 'textDecorationLine'
 >) => {
   const colorValue = useForegroundColor(color ?? 'label');
   const sizeStyles = textSizes[size];
@@ -49,6 +56,7 @@ export const useTextStyles = ({
         ...(uppercase ? { textTransform: 'uppercase' as const } : null),
         ...(tabularNumbers ? { fontVariant: ['tabular-nums' as const] } : null),
         fontFamily,
+        textDecorationLine,
       } as const),
     [
       sizeStyles,

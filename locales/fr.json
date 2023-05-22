@@ -15,6 +15,10 @@
     "enter_email_address": "Entrez l'adresse e-mail",
     "register": "S'inscrire",
     "invalid_email": "Adresse e-mail invalide.",
-    "email_required": "L'adresse e-mail est requise."
+    "email_required": "L'adresse e-mail est requise.",
+    "by_signing_up": "En vous inscrivant, vous acceptez les",
+    "and": "et",
+    "terms_of_use": "Conditions d'utilisation",
+    "privacy_policy": "Politique de confidentialité"
   }
 }

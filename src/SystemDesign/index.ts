@@ -23,3 +23,4 @@ export { Rows } from './Components/Rows/Rows';
 export { Separator } from './Components/Separator/Separator';
 export { Stack } from './Components/Stack/Stack';
 export { Text } from './Components/Text/Text';
+export { Image } from './Components/Images/Image';
