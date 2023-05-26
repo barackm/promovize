@@ -47,9 +47,10 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
           style={styles.logoDetailsWrapper}>
           <Box
             as={Image}
-            source={require('@/assets/images/logos/LogoWhite.png')}
-            iWidth={{ custom: metrics.moderateScale(80) }}
-            iHeight={{ custom: metrics.moderateScale(80) }}
+            source={require('@/assets/images/logos/logo_white_yellow.png')}
+            iWidth={{ custom: metrics.moderateScale(95) }}
+            iHeight={{ custom: metrics.moderateScale(95) }}
+            contentFit="stretch"
             borderRadius={24}
           />
         </Box>
