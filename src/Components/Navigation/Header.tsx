@@ -28,7 +28,7 @@ const Header: React.FC<HeaderProps> = props => {
   return (
     <Box
       style={[styles.container]}
-      background="primary"
+      // background="primary"
       width="full"
       justifyContent="flex-end">
       <Box alignItems="center" justifyContent="center">

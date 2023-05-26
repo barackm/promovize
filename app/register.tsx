@@ -52,7 +52,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = props => {
               </Text>
             </Box>
           </Box>
-          {/* <Stack space="12px" style={styles.buttonsWrapper}>
+          <Stack space="12px" style={styles.buttonsWrapper}>
             <Button
               background="facebookBlue"
               size="medium"
@@ -107,7 +107,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = props => {
                 </Box>
               </Box>
             </Button>
-          </Stack> */}
+          </Stack>
           <Box
             width="full"
             alignItems="center"

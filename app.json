@@ -5,10 +5,10 @@
     "scheme": "promovize",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/LogoBlue.png",
+    "icon": "./src/assets/app_icon.png",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./src/assets/splash.jpg",
+      "image": "./src/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#1B45B9"
     },
@@ -18,12 +18,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/adaptive-icon.png",
+        "foregroundImage": "./src/assets/app_icon.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./src/assets/LogoBlue.png",
+      "favicon": "./src/assets/app_icon.png",
       "bundler": "metro"
     }
   },
