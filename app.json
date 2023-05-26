@@ -1,5 +1,10 @@
 {
   "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "6ad19515-d43a-4745-a437-1f2d77ed673e"
+      }
+    },
     "name": "Promovize",
     "slug": "Promovize",
     "scheme": "promovize",
@@ -14,9 +19,13 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "googleServicesFile": "GoogleService-Info.plist",
+      "bundleIdentifier": "com.promovize.promovize"
     },
     "android": {
+      "googleServicesFile": "google-services.json",
+      "package": "com.promovize.promovize",
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/app_icon.png",
         "backgroundColor": "#ffffff"

@@ -1,3 +1,5 @@
+import auth from '@react-native-firebase/auth';
+
 import {
   Box,
   Button,
@@ -6,7 +8,6 @@ import {
   Inline,
   Stack,
   Text,
-  TextInput,
 } from '@/SystemDesign';
 import { deviceUtils } from '@/SystemDesign/utils';
 import { routes } from '@/routes';
@@ -23,6 +24,8 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
   const router = useRouter();
   const { t } = useTranslation();
   const { colors } = useTheme();
+
+  console.log(auth);
   return (
     <Box
       background="primary"
