@@ -11,6 +11,7 @@ import {
   ButtonPressAnimation,
 } from '@/SystemDesign';
 import { deviceUtils } from '@/SystemDesign/utils';
+import { useGoogleAuth } from '@/hooks/auth/useGoogleAuth';
 import { useTheme } from '@/theme/ThemeProvider';
 import { Stack as RouterStack } from 'expo-router';
 import React from 'react';
@@ -22,6 +23,8 @@ interface RegisterScreenProps {}
 
 const RegisterScreen: React.FC<RegisterScreenProps> = props => {
   const { t } = useTranslation();
+  const { handleSignUpWithGoogle } = useGoogleAuth();
+
   const { colors } = useTheme();
   const handleSubmit = (values: any) => {
     console.log(values);
@@ -83,7 +86,8 @@ const RegisterScreen: React.FC<RegisterScreenProps> = props => {
             <Button
               background="googleBlue"
               size="medium"
-              shadow="12px googleBlue">
+              shadow="12px googleBlue"
+              onPress={handleSignUpWithGoogle}>
               <Box
                 style={styles.authButton}
                 alignItems="center"
