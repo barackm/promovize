@@ -12,10 +12,13 @@ import {
 } from '@/SystemDesign';
 import { deviceUtils } from '@/SystemDesign/utils';
 import { routes } from '@/routes';
-import { signInOrSignupWithGoogleAsync } from '@/services/auth';
+import {
+  signInOrSignupWithGoogleAsync,
+  signUpWithEmailAndPassword,
+} from '@/services/auth';
 import { useTheme } from '@/theme/ThemeProvider';
 import { Stack as RouterStack, useRouter } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
 import * as Yup from 'yup';
@@ -26,9 +29,16 @@ const RegisterScreen: React.FC<RegisterScreenProps> = props => {
   const { t } = useTranslation();
   const router = useRouter();
   const { colors } = useTheme();
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSubmit = (values: any) => {
-    console.log(values);
+  const handleSubmit = async (values: { email: string; password: string }) => {
+    try {
+      setLoading(true);
+      const res = await signUpWithEmailAndPassword(values);
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
   };
 
   const validationSchema = Yup.object({
@@ -129,7 +139,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = props => {
                 autoCorrect={false}
                 secureTextEntry
               />
-              <Button>{t('register.register')}</Button>
+              <Button disabled={loading}>{t('register.register')}</Button>
             </Stack>
           </Form>
           <Stack

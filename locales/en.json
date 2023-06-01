@@ -24,5 +24,11 @@
     "password_requirements": "Password must contain at least one number and one special character",
     "password_required": "Password is required",
     "enter_password": "Enter password"
+  },
+  "login": {
+    "intro": "Simplify social media management with Promovize. Log in now to boost your online presence.",
+    "or_login_with_email": "OR LOGIN WITH EMAIL",
+    "by_signing_in": "By signign in, you agree to Promovize’s",
+    "login": "Login"
   }
 }

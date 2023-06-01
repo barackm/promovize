@@ -32,7 +32,7 @@ export const signInOrSignupWithGoogleAsync = async () => {
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     const signInResult = await auth().signInWithCredential(googleCredential);
     const { uid, displayName, email, photoURL } = signInResult.user;
-    const userRef = db.ref('users').child(uid);
+    const userRef = db.ref('users').child(email || '');
     const userSnapshot = await userRef.once('value');
 
     if (!Boolean(userSnapshot.exists())) {
@@ -42,6 +42,8 @@ export const signInOrSignupWithGoogleAsync = async () => {
         email,
         photoURL,
         id: uid,
+        authMethod: 'google',
+        emailVerified: true,
       });
     }
     return signInResult;
@@ -52,5 +54,51 @@ export const signInOrSignupWithGoogleAsync = async () => {
     } else if (error.code === statusCodes?.PLAY_SERVICES_NOT_AVAILABLE) {
     } else {
     }
+  }
+};
+
+export const signUpWithEmailAndPassword = async (data: {
+  email: string;
+  password: string;
+}) => {
+  try {
+    const { email, password } = data;
+    const signUpResult = await auth().createUserWithEmailAndPassword(
+      email,
+      password,
+    );
+    const { uid } = signUpResult.user;
+    const userRef = database().ref('users').child(email);
+    const userSnapshot = await userRef.once('value');
+
+    if (!userSnapshot.exists()) {
+      await userRef.set({
+        email,
+        id: uid,
+        authMethod: 'email',
+        emailVerified: false,
+      });
+    }
+
+    await signUpResult.user.sendEmailVerification();
+    return signUpResult;
+  } catch (error) {
+    console.error('Error signing up:', error);
+  }
+};
+
+export const signinAsync = async (data: {
+  email: string;
+  password: string;
+}) => {
+  try {
+    const userCredential = await auth().signInWithEmailAndPassword(
+      data.email,
+      data.password,
+    );
+    const user = userCredential.user;
+    return user;
+  } catch (error) {
+    console.log(error);
   }
 };

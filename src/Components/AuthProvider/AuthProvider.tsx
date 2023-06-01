@@ -22,14 +22,20 @@ const AuthProvider: React.FC<AuthProviderProps> = props => {
   useEffect(() => {
     const unsubscribe = auth().onAuthStateChanged(user => {
       if (user) {
-        const userRef = db.ref(`users/${user.uid}`);
-        userRef.on('value', snapshot => {
-          const userData = snapshot.val();
-          if (userData) {
-            dispatch(setCurrentUserData(userData));
-            router.replace(routes.homeScreen);
-          }
-        });
+        const { email } = user;
+        const userRef = db.ref('users');
+        userRef
+          .orderByChild('email')
+          .equalTo(email)
+          .once('value', snapshot => {
+            if (snapshot.exists()) {
+              const userData = Object.values(snapshot.val())[0];
+              dispatch(setCurrentUserData(userData));
+              router.replace(routes.homeScreen);
+            } else {
+              router.push(routes.welcomeScreen);
+            }
+          });
       } else {
         router.push(routes.welcomeScreen);
       }
