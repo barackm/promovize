@@ -11,9 +11,10 @@ import {
   ButtonPressAnimation,
 } from '@/SystemDesign';
 import { deviceUtils } from '@/SystemDesign/utils';
-import { useGoogleAuth } from '@/hooks/auth/useGoogleAuth';
+import { routes } from '@/routes';
+import { signInOrSignupWithGoogleAsync } from '@/services/auth';
 import { useTheme } from '@/theme/ThemeProvider';
-import { Stack as RouterStack } from 'expo-router';
+import { Stack as RouterStack, useRouter } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
@@ -23,9 +24,9 @@ interface RegisterScreenProps {}
 
 const RegisterScreen: React.FC<RegisterScreenProps> = props => {
   const { t } = useTranslation();
-  const { handleSignUpWithGoogle } = useGoogleAuth();
-
+  const router = useRouter();
   const { colors } = useTheme();
+
   const handleSubmit = (values: any) => {
     console.log(values);
   };
@@ -34,7 +35,21 @@ const RegisterScreen: React.FC<RegisterScreenProps> = props => {
     email: Yup.string()
       .email(t('register.invalid_email') || '')
       .required(t('register.email_required') || ''),
+    password: Yup.string()
+      .min(6, t('register.password_min_length') || '')
+      .matches(
+        /^(?=.*[0-9])(?=.*[!@#$%^&*])[\w!@#$%^&*]+$/,
+        t('register.password_requirements') || '',
+      )
+      .required(t('register.password_required') || ''),
   });
+
+  const handleSignUp = async () => {
+    try {
+      await signInOrSignupWithGoogleAsync();
+      return router.replace(routes.homeScreen);
+    } catch (error) {}
+  };
 
   return (
     <Screen paddingHorizontal="16px">
@@ -57,37 +72,10 @@ const RegisterScreen: React.FC<RegisterScreenProps> = props => {
           </Box>
           <Stack space="12px" style={styles.buttonsWrapper}>
             <Button
-              background="facebookBlue"
-              size="medium"
-              shadow="12px facebookBlue">
-              <Box
-                style={styles.authButton}
-                alignItems="center"
-                width="full"
-                height="full">
-                <Box
-                  style={styles.logoContainer}
-                  as={Image}
-                  source={require('@/assets/images/facebookIcon.png')}
-                  iHeight={{ custom: 30 }}
-                  contentFit="contain"
-                  iWidth={{ custom: 30 }}
-                />
-                <Box
-                  style={styles.authButtonTextWrapper}
-                  alignItems="center"
-                  justifyContent="center">
-                  <Text size="16px / 22px" weight="semibold">
-                    {t('register.continue_with_facebook')}
-                  </Text>
-                </Box>
-              </Box>
-            </Button>
-            <Button
               background="googleBlue"
               size="medium"
               shadow="12px googleBlue"
-              onPress={handleSignUpWithGoogle}>
+              onPress={handleSignUp}>
               <Box
                 style={styles.authButton}
                 alignItems="center"
@@ -123,7 +111,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = props => {
             </Text>
           </Box>
           <Form
-            initialValues={{ email: '' }}
+            initialValues={{ email: '', password: '' }}
             onSubimit={handleSubmit}
             validationSchema={validationSchema}>
             <Stack space="16px" style={styles.formWrapper}>
@@ -133,6 +121,13 @@ const RegisterScreen: React.FC<RegisterScreenProps> = props => {
                 autoCapitalize="none"
                 autoCorrect={false}
                 autoComplete="email"
+              />
+              <TextInput
+                name="password"
+                placeholder={t('register.enter_password')}
+                autoCapitalize="none"
+                autoCorrect={false}
+                secureTextEntry
               />
               <Button>{t('register.register')}</Button>
             </Stack>

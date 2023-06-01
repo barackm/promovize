@@ -79,9 +79,16 @@ const styles = StyleSheet.create({
   backButton: {
     width: CONTENT_HEIGHT,
     height: CONTENT_HEIGHT,
+    backgroundColor: 'orange',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   backButtonWrapper: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  backButtonContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

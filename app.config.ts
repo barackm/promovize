@@ -53,6 +53,7 @@ module.exports = ({ config }: any) => ({
   plugins: [
     'expo-localization',
     '@react-native-firebase/app',
+    '@react-native-google-signin/google-signin',
     [
       'expo-build-properties',
       {

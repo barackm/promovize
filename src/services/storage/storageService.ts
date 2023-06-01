@@ -10,7 +10,7 @@ export type ThemesType = (typeof Themes)[keyof typeof Themes];
 
 const THEME_KEY = 'theme';
 const AUTH_TOKEN_KEY = 'Authorization';
-const ACCESS_TOKEN = 'access_token';
+const AUTH_DATA = 'auth_data';
 
 export const saveTheme = async (theme: ThemesType) => {
   try {
@@ -28,9 +28,9 @@ export const getTheme = async (): Promise<ThemesType | null> => {
   return null;
 };
 
-export const saveAuthToken = async (token: string) => {
+export const saveAuthToken = async (token: string | undefined) => {
   try {
-    await AsyncStorage.setItem(AUTH_TOKEN_KEY, token);
+    await AsyncStorage.setItem(AUTH_TOKEN_KEY, token || '');
   } catch (error) {}
 };
 
@@ -44,19 +44,26 @@ export const getAuthToken = async () => {
   return null;
 };
 
-export const saveAccessToken = async (token: string) => {
+export const saveAuthData = async (auth: string | undefined) => {
   try {
-    await AsyncStorage.setItem(ACCESS_TOKEN, token);
+    await AsyncStorage.setItem(AUTH_DATA, auth || '');
   } catch (error) {}
 };
 
-export const getAccessToken = async () => {
+export const getAuthData = async () => {
   try {
-    const token = await AsyncStorage.getItem(ACCESS_TOKEN);
+    const token = await AsyncStorage.getItem(AUTH_DATA);
     if (token) {
       return token;
     }
   } catch (error) {}
 
   return null;
+};
+
+export const removeAuthData = async () => {
+  try {
+    await AsyncStorage.removeItem(AUTH_DATA);
+    return true;
+  } catch (error) {}
 };

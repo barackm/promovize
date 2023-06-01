@@ -3,6 +3,8 @@ import { useFonts } from 'expo-font';
 import { SplashScreen } from 'expo-router';
 import React, { useCallback } from 'react';
 import { StyleSheet, View } from 'react-native';
+import Screen from '../Screen/Screen';
+import AuthProvider from '../AuthProvider/AuthProvider';
 
 interface AppWrapperProps {
   children: React.ReactNode;
@@ -25,7 +27,6 @@ const AppWrapper: React.FC<AppWrapperProps> = props => {
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
-      SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
 
@@ -42,7 +43,7 @@ const AppWrapper: React.FC<AppWrapperProps> = props => {
         },
       ]}
       onLayout={onLayoutRootView}>
-      {children}
+      <AuthProvider>{children}</AuthProvider>
     </View>
   );
 };

@@ -49,7 +49,7 @@ export interface IconProps extends Omit<CustomSvgProps, 'color'> {
 }
 
 const Icon: React.ForwardRefRenderFunction<Ref<unknown>, IconProps> = (
-  { name, size = 20, onPress, ...props },
+  { name, size = 20, ...props },
   ref,
 ) => {
   const IconElement = IconTypes[name];
@@ -62,7 +62,6 @@ const Icon: React.ForwardRefRenderFunction<Ref<unknown>, IconProps> = (
         pointerEvents="none"
         {...props}
       />
-      <TouchableOpacity style={StyleSheet.absoluteFill} onPress={onPress} />
     </View>
   );
 };

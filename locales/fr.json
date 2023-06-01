@@ -19,6 +19,10 @@
     "by_signing_up": "En vous inscrivant, vous acceptez les",
     "and": "et",
     "terms_of_use": "Conditions d'utilisation",
-    "privacy_policy": "Politique de confidentialité"
+    "privacy_policy": "Politique de confidentialité",
+    "password_min_length": "Le mot de passe doit comporter au moins 6 caractères",
+    "password_requirements": "Le mot de passe doit contenir au moins un chiffre et un caractère spécial",
+    "password_required": "Le mot de passe est requis",
+    "enter_password": "Entrez le mot de pass"
   }
 }

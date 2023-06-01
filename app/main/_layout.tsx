@@ -1,10 +1,14 @@
 import { Icon } from '@/Components/Icons';
 import AppTabBar from '@/Components/Navigation/AppTabBar';
 import { ios } from '@/env';
+import { useAuth } from '@/hooks/auth/useAuth';
+import { routes } from '@/routes';
 import { useTheme } from '@/theme/ThemeProvider';
-import { Tabs } from 'expo-router';
-import React, { ReactNode } from 'react';
+import { RootState } from 'app/_layout';
+import { Tabs, useRouter } from 'expo-router';
+import React, { ReactNode, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 
 interface MainNavigatorProps {}
 
@@ -22,7 +26,8 @@ export type RouteInterface = {
 };
 
 const MainNavigator: React.FC<MainNavigatorProps> = props => {
-  const { isDarkMode, colors } = useTheme();
+  const { colors } = useTheme();
+
   const appNavigators: RouteInterface[] = [
     {
       name: 'home/index',
