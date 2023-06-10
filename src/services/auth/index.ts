@@ -9,6 +9,7 @@ import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+import api from '@/api';
 
 GoogleSignin.configure();
 
@@ -32,21 +33,14 @@ export const signInOrSignupWithGoogleAsync = async () => {
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     const signInResult = await auth().signInWithCredential(googleCredential);
     const { uid, displayName, email, photoURL } = signInResult.user;
-    const userRef = db.ref('users').child(email || '');
-    const userSnapshot = await userRef.once('value');
+    const res = await api.auth.signinWithGoogle({
+      uid,
+      displayName,
+      email,
+      photoURL,
+    });
 
-    if (!Boolean(userSnapshot.exists())) {
-      await userRef.set({
-        firstName: displayName?.split(' ')[0],
-        lastName: displayName?.split(' ')[1],
-        email,
-        photoURL,
-        id: uid,
-        authMethod: 'google',
-        emailVerified: true,
-      });
-    }
-    return signInResult;
+    return res;
   } catch (error: any) {
     if (!statusCodes) return;
     if (error.code === statusCodes?.SIGN_IN_CANCELLED) {

@@ -1,3 +1,4 @@
+import { API_BASE_URL } from '@/constants';
 import axiosFetcher from 'axios';
 
 export default {
