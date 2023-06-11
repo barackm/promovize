@@ -1,15 +1,11 @@
 import { setCurrentUserData } from '@/store/slices/auth';
 import { Dispatch } from 'redux';
 import auth from '@react-native-firebase/auth';
-import database from '@react-native-firebase/database';
-
-const db = database();
-
 import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-import api from '@/api';
+import { db } from '@/config/firebase';
 
 GoogleSignin.configure();
 
@@ -32,15 +28,7 @@ export const signInOrSignupWithGoogleAsync = async () => {
     const { idToken } = await GoogleSignin.signIn();
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     const signInResult = await auth().signInWithCredential(googleCredential);
-    const { uid, displayName, email, photoURL } = signInResult.user;
-    const res = await api.auth.signinWithGoogle({
-      uid,
-      displayName,
-      email,
-      photoURL,
-    });
-
-    return res;
+    return signInResult.user;
   } catch (error: any) {
     if (!statusCodes) return;
     if (error.code === statusCodes?.SIGN_IN_CANCELLED) {
@@ -61,12 +49,7 @@ export const signUpWithEmailAndPassword = async (data: {
       email,
       password,
     );
-    const { uid } = signUpResult.user;
-    const res = await api.auth.signUpWithEmail({
-      uid,
-      email,
-    });
-    return res;
+    return signUpResult.user;
   } catch (error) {
     console.error('Error signing up:', error);
   }

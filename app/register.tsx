@@ -34,7 +34,8 @@ const RegisterScreen: React.FC<RegisterScreenProps> = props => {
   const handleSubmit = async (values: { email: string; password: string }) => {
     try {
       setLoading(true);
-      const res = await signUpWithEmailAndPassword(values);
+      await signUpWithEmailAndPassword(values);
+      return router.replace(routes.homeScreen);
     } catch (error) {
     } finally {
       setLoading(false);

@@ -46,8 +46,3 @@ const AuthProvider: React.FC<AuthProviderProps> = props => {
 };
 
 export default AuthProvider;
-
-// dispatch(setCurrentUserData(userData));
-// router.replace(routes.homeScreen);
-// } else {
-// router.push(routes.welcomeScreen);
