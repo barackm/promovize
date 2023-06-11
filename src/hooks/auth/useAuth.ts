@@ -9,6 +9,7 @@ export const useAuth = () => {
   useEffect(() => {
     if (!router) return;
     const unsubscribe = auth().onAuthStateChanged(user => {
+      console.log(user, 'user');
       if (user) {
         router.replace(routes.homeScreen);
       } else {

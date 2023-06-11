@@ -5,8 +5,9 @@ import { Stack } from 'expo-router';
 import { Provider } from 'react-redux';
 import React from 'react';
 import configureStore from '@/store';
-import '../config/i18n';
-import '../config/firebase';
+
+import '../src/config/i18n';
+import '../src/config/firebase';
 
 const store = configureStore();
 export type RootState = ReturnType<typeof store.getState>;

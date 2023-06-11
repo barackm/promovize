@@ -11,29 +11,19 @@ import { deviceUtils } from '@/SystemDesign/utils';
 import { routes } from '@/routes';
 import { metrics } from '@/styles';
 import { useTheme } from '@/theme/ThemeProvider';
-import { useRouter, Stack as RouterStack, Redirect } from 'expo-router';
-import React, { useEffect } from 'react';
+import { useRouter, Stack as RouterStack } from 'expo-router';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet } from 'react-native';
-import { useSelector } from 'react-redux';
-import { RootState } from './_layout';
-import api from '@/api';
+import { useRedirect } from '@/hooks/auth/useRedirect';
 
 interface WelcomeScreenProps {}
 
 const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
+  useRedirect();
   const router = useRouter();
   const { t } = useTranslation();
   const { colors } = useTheme();
-
-  const { currentUser } = useSelector((state: RootState) => state.auth);
-
-  useEffect(() => {
-    if (currentUser) {
-      <Redirect href={routes.homeScreen} />;
-      return;
-    }
-  }, [currentUser]);
 
   return (
     <Box
