@@ -62,20 +62,11 @@ export const signUpWithEmailAndPassword = async (data: {
       password,
     );
     const { uid } = signUpResult.user;
-    const userRef = database().ref('users').child(email);
-    const userSnapshot = await userRef.once('value');
-
-    if (!userSnapshot.exists()) {
-      await userRef.set({
-        email,
-        id: uid,
-        authMethod: 'email',
-        emailVerified: false,
-      });
-    }
-
-    await signUpResult.user.sendEmailVerification();
-    return signUpResult;
+    const res = await api.auth.signUpWithEmail({
+      uid,
+      email,
+    });
+    return res;
   } catch (error) {
     console.error('Error signing up:', error);
   }

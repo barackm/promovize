@@ -6,6 +6,8 @@ import { Provider } from 'react-redux';
 import React from 'react';
 import configureStore from '@/store';
 import '../config/i18n';
+import '../config/firebase';
+
 const store = configureStore();
 export type RootState = ReturnType<typeof store.getState>;
 

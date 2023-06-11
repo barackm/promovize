@@ -121,7 +121,10 @@ const RegisterScreen: React.FC<RegisterScreenProps> = props => {
             </Text>
           </Box>
           <Form
-            initialValues={{ email: '', password: '' }}
+            initialValues={{
+              email: 'barackmukelenga100@gmail.com',
+              password: '@user1',
+            }}
             onSubimit={handleSubmit}
             validationSchema={validationSchema}>
             <Stack space="16px" style={styles.formWrapper}>

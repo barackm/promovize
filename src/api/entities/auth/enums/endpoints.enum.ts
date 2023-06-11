@@ -1,3 +1,4 @@
 export enum AuthEndpoints {
-    signinWithGoogle = 'auth-signinWithGoogle',
+  signinWithGoogle = 'auth-signinWithGoogle',
+  signUpWithEmail = 'auth-signUpWithEmail',
 }
