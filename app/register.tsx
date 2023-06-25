@@ -15,7 +15,7 @@ import {
 import { deviceUtils } from '@/SystemDesign/utils';
 import api from '@/api';
 import { useTheme } from '@/theme/ThemeProvider';
-import { Stack as RouterStack } from 'expo-router';
+import { Stack as RouterStack, useRouter } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -27,21 +27,30 @@ import {
 import * as Yup from 'yup';
 import { useGoogleAuth } from '@/hooks/auth/useGoogleAuth';
 import Constants from 'expo-constants';
+import { useDispatch } from 'react-redux';
+import {
+  setAccessToken,
+  setRefreshToken,
+} from '@/services/storage/storageService';
+import { setCurrentUser } from '@/store/entities/auth';
+import { routes } from '@/routes';
 
 const RegisterScreen: React.FC = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const router = useRouter();
   const [loading, setLoading] = React.useState<boolean>(false);
-  const { handleLoginWithGoogle } = useGoogleAuth();
+  const { handleLoginWithGoogle, loading: signingWithGoogle } = useGoogleAuth();
 
   const handleSubmit = async (values: any) => {
     try {
       setLoading(true);
-      const res = await api.auth.registerAsync(values);
-      if (res) {
-        Alert.alert('Success');
-        console.log(res);
-      }
+      await api.auth.registerAsync(values);
+      Alert.alert(
+        'Success',
+        'Register successfully, an email has been sent to your email address, please check your email to verify your account',
+      );
+      router.replace(routes.welcomeScreen);
     } catch (error: any) {
       Alert.alert('Error', error.message);
     } finally {
@@ -65,7 +74,6 @@ const RegisterScreen: React.FC = () => {
       style={styles.container}>
       <Screen paddingHorizontal="16px">
         <RouterStack.Screen options={{ headerShown: true }} />
-
         <Stack space="16px">
           <Box alignItems="center">
             <Box width="3/4" marginTop={{ custom: '5%' }}>
@@ -83,6 +91,7 @@ const RegisterScreen: React.FC = () => {
               background="googleBlue"
               size="medium"
               onPress={handleLoginWithGoogle}
+              disabled={signingWithGoogle}
               shadow="12px googleBlue">
               <Box
                 style={styles.authButton}
@@ -137,7 +146,9 @@ const RegisterScreen: React.FC = () => {
                 autoCorrect={false}
                 secureTextEntry
               />
-              <Button disabled={loading}>{t('register.register')}</Button>
+              <Button disabled={loading || signingWithGoogle}>
+                {t('register.register')}
+              </Button>
             </Stack>
           </Form>
           <Stack
