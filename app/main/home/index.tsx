@@ -1,6 +1,5 @@
 import Screen from '@/Components/Screen/Screen';
 import { Box, Button, Row, Rows, TextInput } from '@/SystemDesign';
-import { firebaseAppId } from '@/env';
 import { routes } from '@/routes';
 import { Stack, useRouter } from 'expo-router';
 import React from 'react';

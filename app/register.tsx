@@ -11,35 +11,56 @@ import {
   ButtonPressAnimation,
 } from '@/SystemDesign';
 import { deviceUtils } from '@/SystemDesign/utils';
+import api from '@/api';
 import { useTheme } from '@/theme/ThemeProvider';
 import { Stack as RouterStack } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { KeyboardAvoidingView, Platform, StyleSheet } from 'react-native';
+import {
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+} from 'react-native';
 import * as Yup from 'yup';
 
-interface RegisterScreenProps {}
-
-const RegisterScreen: React.FC<RegisterScreenProps> = props => {
+const RegisterScreen: React.FC = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
-  const handleSubmit = (values: any) => {
-    console.log(values);
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  const handleSubmit = async (values: any) => {
+    try {
+      setLoading(true);
+      const res = await api.auth.registerAsync(values);
+      if (res) {
+        Alert.alert('Success');
+        console.log(res);
+      }
+    } catch (error: any) {
+      Alert.alert('Error', error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const validationSchema = Yup.object({
     email: Yup.string()
       .email(t('register.invalid_email') || '')
       .required(t('register.email_required') || ''),
+    password: Yup.string()
+      .min(6, t('register.password_min') || '')
+      .matches(/(?=.*\d)/, t('register.password_digit') || '')
+      .required(t('register.password_required') || ''),
   });
 
   return (
-    <Screen paddingHorizontal="16px">
-      <RouterStack.Screen options={{ headerShown: true }} />
-      <KeyboardAvoidingView
-        keyboardVerticalOffset={deviceUtils.statusBarHeight}
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        style={styles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.container}>
+      <Screen paddingHorizontal="16px">
+        <RouterStack.Screen options={{ headerShown: true }} />
+
         <Stack space="16px">
           <Box alignItems="center">
             <Box width="3/4" marginTop={{ custom: '5%' }}>
@@ -119,7 +140,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = props => {
             </Text>
           </Box>
           <Form
-            initialValues={{ email: '' }}
+            initialValues={{ email: '', password: '' }}
             onSubimit={handleSubmit}
             validationSchema={validationSchema}>
             <Stack space="16px" style={styles.formWrapper}>
@@ -130,7 +151,14 @@ const RegisterScreen: React.FC<RegisterScreenProps> = props => {
                 autoCorrect={false}
                 autoComplete="email"
               />
-              <Button>{t('register.register')}</Button>
+              <TextInput
+                name="password"
+                placeholder={t('register.enter_password')}
+                autoCapitalize="none"
+                autoCorrect={false}
+                secureTextEntry
+              />
+              <Button disabled={loading}>{t('register.register')}</Button>
             </Stack>
           </Form>
           <Stack
@@ -157,8 +185,8 @@ const RegisterScreen: React.FC<RegisterScreenProps> = props => {
             </Inline>
           </Stack>
         </Stack>
-      </KeyboardAvoidingView>
-    </Screen>
+      </Screen>
+    </KeyboardAvoidingView>
   );
 };
 

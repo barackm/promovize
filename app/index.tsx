@@ -1,5 +1,3 @@
-import auth from '@react-native-firebase/auth';
-
 import {
   Box,
   Button,
@@ -25,7 +23,6 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
   const { t } = useTranslation();
   const { colors } = useTheme();
 
-  console.log(auth);
   return (
     <Box
       background="primary"
