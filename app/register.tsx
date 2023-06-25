@@ -1,5 +1,7 @@
 import Form from '@/Components/Form/form';
 import Screen from '@/Components/Screen/Screen';
+import * as Google from 'expo-auth-session/providers/google';
+
 import {
   Box,
   Text,
@@ -23,11 +25,14 @@ import {
   StyleSheet,
 } from 'react-native';
 import * as Yup from 'yup';
+import { useGoogleAuth } from '@/hooks/auth/useGoogleAuth';
+import Constants from 'expo-constants';
 
 const RegisterScreen: React.FC = () => {
   const { t } = useTranslation();
   const { colors } = useTheme();
   const [loading, setLoading] = React.useState<boolean>(false);
+  const { handleLoginWithGoogle } = useGoogleAuth();
 
   const handleSubmit = async (values: any) => {
     try {
@@ -75,35 +80,9 @@ const RegisterScreen: React.FC = () => {
           </Box>
           <Stack space="12px" style={styles.buttonsWrapper}>
             <Button
-              background="facebookBlue"
-              size="medium"
-              shadow="12px facebookBlue">
-              <Box
-                style={styles.authButton}
-                alignItems="center"
-                width="full"
-                height="full">
-                <Box
-                  style={styles.logoContainer}
-                  as={Image}
-                  source={require('@/assets/images/facebookIcon.png')}
-                  iHeight={{ custom: 30 }}
-                  contentFit="contain"
-                  iWidth={{ custom: 30 }}
-                />
-                <Box
-                  style={styles.authButtonTextWrapper}
-                  alignItems="center"
-                  justifyContent="center">
-                  <Text size="16px / 22px" weight="semibold">
-                    {t('register.continue_with_facebook')}
-                  </Text>
-                </Box>
-              </Box>
-            </Button>
-            <Button
               background="googleBlue"
               size="medium"
+              onPress={handleLoginWithGoogle}
               shadow="12px googleBlue">
               <Box
                 style={styles.authButton}
