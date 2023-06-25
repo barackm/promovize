@@ -1,9 +1,17 @@
 // @ts-nocheck
-module.exports = ({ config }: any) => ({
+import 'react-native-dotenv';
+module.exports = {
   expo: {
     extra: {
       eas: {
         projectId: '6ad19515-d43a-4745-a437-1f2d77ed673e',
+      },
+      apiUrl: process.env.PROMOVIZE_API_URL,
+      google: {
+        googleClientId: process.env.PROMOVIZE_GOOGLE_CLIENT_ID,
+        googleIosClientId: process.env.PROMOVIZE_GOOGLE_IOS_CLIENT_ID,
+        googleAndroidClientId: process.env.PROMOVIZE_GOOGLE_ANDROID_CLIENT_ID,
+        googleExpoClientId: process.env.PROMOVIZE_GOOGLE_EXPO_CLIENT_ID,
       },
     },
     name: 'Promovize',
@@ -21,11 +29,9 @@ module.exports = ({ config }: any) => ({
     assetBundlePatterns: ['**/*'],
     ios: {
       supportsTablet: true,
-      googleServicesFile: 'GoogleService-Info.plist',
       bundleIdentifier: 'com.promovize.promovize',
     },
     android: {
-      googleServicesFile: 'google-services.json',
       package: 'com.promovize.promovize',
       adaptiveIcon: {
         foregroundImage: './src/assets/app_icon.png',
@@ -44,22 +50,6 @@ module.exports = ({ config }: any) => ({
   updates: {
     url: process.env.PROMOVIZE_UPDATES_URL,
   },
-  extra: {
-    apiUrl: process.env.API_URL,
-    eas: {
-      projectId: process.env.PROMOVIZE_EAS_PROJECT_ID,
-    },
-  },
-  plugins: [
-    'expo-localization',
-    '@react-native-firebase/app',
-    [
-      'expo-build-properties',
-      {
-        ios: {
-          useFrameworks: 'static',
-        },
-      },
-    ],
-  ],
-});
+
+  plugins: ['expo-localization'],
+};

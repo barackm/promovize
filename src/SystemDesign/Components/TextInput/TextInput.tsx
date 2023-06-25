@@ -51,7 +51,6 @@ export const TextInput: React.FC<TextInputProps> = React.memo(props => {
           }
           onChangeText && onChangeText(value);
         }}
-        placeholder="Enter your email"
         placeholderTextColor={colors.black}
         onBlur={() => {
           if (formikContext) {

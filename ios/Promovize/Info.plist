@@ -32,12 +32,6 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.googleusercontent.apps.572592746242-je50srdd36suk95q9qs5frk5j07fuict</string>
-        </array>
-      </dict>
-      <dict>
-        <key>CFBundleURLSchemes</key>
-        <array>
           <string>exp+promovize</string>
         </array>
       </dict>
