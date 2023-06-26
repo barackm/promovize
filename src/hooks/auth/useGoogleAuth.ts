@@ -1,6 +1,5 @@
 import * as Google from 'expo-auth-session/providers/google';
 import { useTranslation } from 'react-i18next';
-import jwt_decode from 'jwt-decode';
 import { useEffect, useState } from 'react';
 import env from '@/env';
 import api from '@/api';
@@ -30,7 +29,7 @@ export const useGoogleAuth = () => {
 
   const dispatch = useDispatch();
 
-  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+  const [, response, promptAsync] = Google.useIdTokenAuthRequest({
     androidClientId: googleConfig?.googleAndroidClientId,
     iosClientId: googleConfig?.googleIosClientId,
     expoClientId: googleConfig?.googleExpoClientId,

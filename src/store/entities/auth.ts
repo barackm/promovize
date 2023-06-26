@@ -1,10 +1,16 @@
+import { User } from '@/entities/interfaces/user.interface';
 import { createSlice } from '@reduxjs/toolkit';
 
-const slice: any = createSlice({
+interface AuthState {
+  currentUser: User | null;
+}
+const initialState: AuthState = {
+  currentUser: null,
+};
+
+const slice = createSlice({
   name: 'auth',
-  initialState: {
-    currentUser: null,
-  },
+  initialState: initialState,
   reducers: {
     setCurrentUser: (state, action) => {
       state.currentUser = action.payload;

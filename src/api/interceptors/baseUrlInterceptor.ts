@@ -1,6 +1,6 @@
 import axiosFetcher from 'axios';
-const baseUrl = 'http://localhost:5001';
+import { PROMOVIZE_API_URL } from '@env';
 
 export default () => {
-  axiosFetcher.defaults.baseURL = baseUrl;
+  axiosFetcher.defaults.baseURL = 'http://192.168.1.65:5001';
 };

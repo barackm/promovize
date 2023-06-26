@@ -6,6 +6,7 @@ import { Stack } from 'expo-router';
 import React from 'react';
 import configureStore from '@/store/';
 import { Provider } from 'react-redux';
+import AuthContainer from '@/Components/AuthContainer/AuthContainer';
 
 const store = configureStore;
 
@@ -14,23 +15,25 @@ const App: React.FC = () => {
     <Provider store={store}>
       <MainThemeProvider>
         <AppWrapper>
-          <Stack
-            screenOptions={{
-              headerShown: false,
-              header: props => {
-                const { navigation, options, route } = props;
-                const title = options.title || route.name;
-                const { canGoBack, goBack } = navigation;
-                return (
-                  <Header
-                    title={title}
-                    canGoBack={canGoBack()}
-                    goBack={goBack}
-                  />
-                );
-              },
-            }}
-          />
+          <AuthContainer>
+            <Stack
+              screenOptions={{
+                headerShown: false,
+                header: props => {
+                  const { navigation, options, route } = props;
+                  const title = options.title || route.name;
+                  const { canGoBack, goBack } = navigation;
+                  return (
+                    <Header
+                      title={title}
+                      canGoBack={canGoBack()}
+                      goBack={goBack}
+                    />
+                  );
+                },
+              }}
+            />
+          </AuthContainer>
         </AppWrapper>
       </MainThemeProvider>
     </Provider>

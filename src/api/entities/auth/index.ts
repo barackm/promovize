@@ -14,4 +14,8 @@ export default {
     const response = await http.post(AuthEndpoints.googleSignInRedirect, data);
     return response.data;
   },
+  getUserDataAsync: async () => {
+    const response = await http.get(AuthEndpoints.getUserData);
+    return response.data;
+  },
 };

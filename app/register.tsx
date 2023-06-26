@@ -1,7 +1,5 @@
 import Form from '@/Components/Form/form';
 import Screen from '@/Components/Screen/Screen';
-import * as Google from 'expo-auth-session/providers/google';
-
 import {
   Box,
   Text,
@@ -26,13 +24,6 @@ import {
 } from 'react-native';
 import * as Yup from 'yup';
 import { useGoogleAuth } from '@/hooks/auth/useGoogleAuth';
-import Constants from 'expo-constants';
-import { useDispatch } from 'react-redux';
-import {
-  setAccessToken,
-  setRefreshToken,
-} from '@/services/storage/storageService';
-import { setCurrentUser } from '@/store/entities/auth';
 import { routes } from '@/routes';
 
 const RegisterScreen: React.FC = () => {

@@ -9,12 +9,14 @@ import {
 } from '@/SystemDesign';
 import { deviceUtils } from '@/SystemDesign/utils';
 import { routes } from '@/routes';
+import { RootState } from '@/store';
 import { metrics } from '@/styles';
 import { useTheme } from '@/theme/ThemeProvider';
 import { useRouter, Stack as RouterStack } from 'expo-router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet } from 'react-native';
+import { useSelector } from 'react-redux';
 
 interface WelcomeScreenProps {}
 
@@ -22,7 +24,15 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
   const router = useRouter();
   const { t } = useTranslation();
   const { colors } = useTheme();
+  const { currentUser } = useSelector((state: RootState) => state.auth);
 
+  useEffect(() => {
+    if (currentUser) {
+      router.replace(routes.homeScreen);
+    }
+  }, [currentUser]);
+
+  console.log('WelcomeScreen', currentUser);
   return (
     <Box
       background="primary"
