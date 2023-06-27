@@ -18,9 +18,7 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 
-interface WelcomeScreenProps {}
-
-const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
+const WelcomeScreen: React.FC = () => {
   const router = useRouter();
   const { t } = useTranslation();
   const { colors } = useTheme();
@@ -28,11 +26,12 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = props => {
 
   useEffect(() => {
     if (currentUser) {
-      router.replace(routes.homeScreen);
+      setTimeout(() => {
+        router.replace(routes.homeScreen);
+      }, 100);
     }
   }, [currentUser]);
 
-  console.log('WelcomeScreen', currentUser);
   return (
     <Box
       background="primary"

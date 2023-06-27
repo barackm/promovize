@@ -3,15 +3,17 @@ import {
   getRefreshToken,
 } from '@/services/storage/storageService';
 import { RootState } from '@/store';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import jwtDecode from 'jwt-decode';
 import { useTheme } from '@/theme/ThemeProvider';
 import api from '@/api';
 import axios from 'axios';
+import * as Linking from 'expo-linking';
 import { setCurrentUser } from '@/store/entities/auth';
-
+import { routes } from '@/routes';
+import { useRootNavigationState, useRouter } from 'expo-router';
 interface AuthContainerProps {
   children: React.ReactNode;
 }
@@ -21,6 +23,7 @@ const AuthContainer: React.FC<AuthContainerProps> = props => {
   const [fetching, setFetching] = React.useState<boolean>(false);
   const { currentUser } = useSelector((state: RootState) => state.auth);
   const { colors } = useTheme();
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const checkAuth = async () => {
@@ -56,6 +59,7 @@ const AuthContainer: React.FC<AuthContainerProps> = props => {
       setFetching(false);
     }
   };
+
   const getUserInfo = async () => {
     try {
       setFetching(true);
@@ -67,6 +71,33 @@ const AuthContainer: React.FC<AuthContainerProps> = props => {
     } catch (error) {
     } finally {
       setFetching(false);
+    }
+  };
+
+  useEffect(() => {
+    Linking.getInitialURL().then(url => {
+      if (url) {
+        handleDeepLink(url);
+      }
+    });
+
+    const deepLinkListener = Linking.addEventListener('url', event => {
+      handleDeepLink(event.url);
+    });
+
+    return () => {
+      deepLinkListener.remove();
+    };
+  }, []);
+
+  const handleDeepLink = async (url: string) => {
+    const { queryParams, path } = await Linking.parse(url);
+    const { token } = queryParams || {};
+
+    if (path === routes.confirmEmail.replace('/', '') && token) {
+      setTimeout(() => {
+        router.replace(`${routes.confirmEmail}?token=${token}`);
+      }, 100);
     }
   };
 

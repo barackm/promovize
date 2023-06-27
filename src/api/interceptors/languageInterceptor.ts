@@ -6,9 +6,7 @@ const formattedLang = currentLanguage.split('-')[0];
 export default () => {
   axios.interceptors.request.use(
     request => {
-      request.headers['Accept-Language'] = formattedLang;
       request.headers['x-custom-lang'] = formattedLang;
-      request.url += `?lang=${formattedLang}`;
       return request;
     },
     error => Promise.reject(error),

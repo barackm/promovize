@@ -3,6 +3,7 @@ export const routes = {
   welcomeScreen: '/',
   register: '/register',
   login: '/login',
+  confirmEmail: '/confirm',
 };
 
 export type Route = keyof typeof routes;

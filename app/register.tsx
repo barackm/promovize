@@ -25,6 +25,9 @@ import {
 import * as Yup from 'yup';
 import { useGoogleAuth } from '@/hooks/auth/useGoogleAuth';
 import { routes } from '@/routes';
+import * as Linking from 'expo-linking';
+
+const prefix = Linking.createURL(`${routes.confirmEmail}`);
 
 const RegisterScreen: React.FC = () => {
   const { t } = useTranslation();
@@ -36,7 +39,7 @@ const RegisterScreen: React.FC = () => {
   const handleSubmit = async (values: any) => {
     try {
       setLoading(true);
-      await api.auth.registerAsync(values);
+      await api.auth.registerAsync({ ...values, prefix });
       Alert.alert(
         'Success',
         'Register successfully, an email has been sent to your email address, please check your email to verify your account',
